@@ -26,8 +26,8 @@ const Navbar: React.FC = () => {
             <Link to="/car-ass">Buy Car Assesories</Link>
           </div>
         </div>
-        <div className="lg:flex items-center gap-5 ">
-          <div className="hidden lg:block">
+        <div className="sm:flex flex-row items-center gap-5 ">
+          <div className="hidden sm:block">
             <SearchInput />
           </div>
           <SignUpButton />
