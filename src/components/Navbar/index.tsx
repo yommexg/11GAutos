@@ -20,6 +20,7 @@ const Navbar: React.FC = () => {
           <MobileSidebar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           {!isMenuOpen && <Logo />}
           <div className="hidden lg:flex flex-row gap-5 text-sm">
+            <Link to="/">Home</Link>
             <Link to="/new-cars">Buy New Cars</Link>
             <Link to="/used-cars">Buy Used Cars</Link>
             <Link to="/sell-car">Sell Your Car</Link>

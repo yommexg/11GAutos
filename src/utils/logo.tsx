@@ -1,5 +1,5 @@
-const logoImage = new URL("../assets/11GLogo.png", import.meta.url).href;
-const logoName = new URL("../assets/11GName.png", import.meta.url).href;
+const logoImage = new URL("../assets/logo/11GLogo.png", import.meta.url).href;
+const logoName = new URL("../assets/logo/11GName.png", import.meta.url).href;
 
 const Logo = () => {
   return (

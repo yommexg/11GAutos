@@ -30,6 +30,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               &times;
             </span>
             <div className="lg:hidden flex flex-col gap-8 text-sm text-white">
+              <Link to="/">Home</Link>
               <Link to="/new-cars">Buy New Cars</Link>
               <Link to="/used-cars">Buy Used Cars</Link>
               <Link to="/sell-car">Sell Your Car</Link>
