@@ -14,8 +14,10 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
   toggleMenu,
 }) => {
   return (
-    <div className="lg:hidden  z-40" onClick={toggleMenu}>
-      {!isMenuOpen && <FaBars size={25} />}
+    <div className="lg:hidden z-40" onClick={toggleMenu}>
+      <div className="cursor-pointer">
+        {!isMenuOpen && <FaBars size={25} />}
+      </div>
 
       {isMenuOpen && (
         <div className="fixed inset-0 bg-white opacity-90">
