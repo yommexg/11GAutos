@@ -7,7 +7,7 @@ const Banner = () => {
   return (
     <div
       style={{ backgroundImage: `url(${banner1})` }}
-      className="bg-cover bg-center h-screen sm:h-[40rem] flex items-center justify-center flex-col gap-10 text-white mt-18"
+      className="bg-cover bg-center h-screen sm:h-[35rem] flex items-center justify-center flex-col gap-10 text-white mt-[75px]"
     >
       <h1 className="text-5xl font-bold">11G Autos</h1>
       <h2 className="text-xl font-semibold italic">
