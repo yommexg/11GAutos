@@ -1,18 +1,22 @@
 import React from "react";
 import { FaBars } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import Logo from "../../utils/logo";
 
 interface MobileSidebarProps {
   isMenuOpen: boolean;
   toggleMenu: () => void;
+  scrollToTop: () => void;
 }
 
 const MobileSidebar: React.FC<MobileSidebarProps> = ({
   isMenuOpen,
   toggleMenu,
+  scrollToTop,
 }) => {
+  const location = useLocation();
+
   return (
     <div className="lg:hidden z-40" onClick={toggleMenu}>
       <div className="cursor-pointer">
@@ -32,11 +36,51 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               &times;
             </span>
             <div className="lg:hidden flex flex-col gap-8 text-sm text-white">
-              <Link to="/">Home</Link>
-              <Link to="/new-cars">Buy New Cars</Link>
-              <Link to="/used-cars">Buy Used Cars</Link>
-              <Link to="/sell-car">Sell Your Car</Link>
-              <Link to="/car-ass">Buy Car Assesories</Link>
+              <Link
+                to="/"
+                className={`hover:opacity-60 ${
+                  location.pathname === "/" ? "text-blue-300" : ""
+                }`}
+                onClick={scrollToTop}
+              >
+                Home
+              </Link>
+              <Link
+                to="/new-cars"
+                className={`hover:opacity-60 ${
+                  location.pathname === "/new-cars" ? "text-blue-300" : ""
+                }`}
+                onClick={scrollToTop}
+              >
+                Buy New Cars
+              </Link>
+              <Link
+                to="/used-cars"
+                className={`hover:opacity-60 ${
+                  location.pathname === "/used-cars" ? "text-blue-300" : ""
+                }`}
+                onClick={scrollToTop}
+              >
+                Buy Used Cars
+              </Link>
+              <Link
+                to="/sell-car"
+                className={`hover:opacity-60 ${
+                  location.pathname === "/sell-car" ? "text-blue-300" : ""
+                }`}
+                onClick={scrollToTop}
+              >
+                Sell Your Car
+              </Link>
+              <Link
+                to="/car-ass"
+                className={`hover:opacity-60 ${
+                  location.pathname === "/car-ass" ? "text-blue-300" : ""
+                }`}
+                onClick={scrollToTop}
+              >
+                Buy Car Accessories
+              </Link>
             </div>
           </div>
         </div>
