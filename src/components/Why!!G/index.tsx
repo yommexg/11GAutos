@@ -32,7 +32,7 @@ const Why11G = () => {
       <div className="md:hidden items-center">
         <div
           key={Why11GData[currentIndex]?.title + currentIndex}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center relative"
         >
           <img
             src={Why11GData[currentIndex]?.imgSrc}
@@ -45,14 +45,25 @@ const Why11G = () => {
           </p>
         </div>
         <div className="flex justify-between mt-10">
-          <button onClick={goToPrevious} disabled={currentIndex === 0}>
-            Previous
+          <button
+            onClick={goToPrevious}
+            disabled={currentIndex === 0}
+            className={`text-3xl bg-white pt-[1px] pb-[7px] px-3 cursor-pointer ${
+              currentIndex === 0 ? "text-gray-200" : "text-black"
+            }`}
+          >
+            &lt;
           </button>
           <button
             onClick={goToNext}
             disabled={currentIndex === Why11GData.length - 1}
+            className={`text-3xl bg-white pt-[1px] pb-[7px] px-3 cursor-pointer ${
+              currentIndex === Why11GData.length - 1
+                ? "text-gray-200"
+                : "text-black"
+            }`}
           >
-            Next
+            &gt;
           </button>
         </div>
       </div>
