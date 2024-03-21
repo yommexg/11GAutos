@@ -13,13 +13,15 @@ function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/new-cars" element={<NewCars />} />
-        <Route path="/used-cars" element={<UsedCars />} />
-        <Route path="/car-ass" element={<CarAssesories />} />
-        <Route path="/sell-car" element={<SellCars />} />
-      </Routes>
+      <div className="mt-[80px]">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/new-cars" element={<NewCars />} />
+          <Route path="/used-cars" element={<UsedCars />} />
+          <Route path="/car-ass" element={<CarAssesories />} />
+          <Route path="/sell-car" element={<SellCars />} />
+        </Routes>
+      </div>
       <Footer />
     </>
   );
