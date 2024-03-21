@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 export const Products = [
   {
     id: 1,
-    link: "/used",
+    link: "/used-cars",
     name: "Used",
   },
   {
@@ -13,12 +13,12 @@ export const Products = [
   },
   {
     id: 3,
-    link: "/",
+    link: "/car-ass",
     name: "Assesories",
   },
   {
     id: 4,
-    link: "/sell",
+    link: "/sell-car",
     name: "Sell Your Car",
   },
 ];

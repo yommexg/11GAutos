@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import { Products, Resources, About, WorkWith11GAutos } from "./data";
 
 const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="flex flex-col md:flex-row items-center justify-center md:items-start md:justify-start mt-5 p-6 pb-8 gap-6 md:px-24 ">
       <div className="border-b-2 pb-6 w-[100%] border-black md:border-b-0 md:pb-0">
@@ -15,6 +22,7 @@ const Footer = () => {
               key={item?.id}
               to={item?.link}
               className="text-sm md:text-base text-center md:text-left italic hover:text-blue-400"
+              onClick={scrollToTop}
             >
               {item?.name}
             </Link>
@@ -30,6 +38,7 @@ const Footer = () => {
             <Link
               key={item?.id}
               to={item?.link}
+              onClick={scrollToTop}
               className="text-sm md:text-base text-center italic hover:text-blue-400"
             >
               {item?.name}
@@ -46,6 +55,7 @@ const Footer = () => {
             <Link
               key={item?.id}
               to={item?.link}
+              onClick={scrollToTop}
               className="text-sm md:text-base text-center italic hover:text-blue-400"
             >
               {item?.name}
@@ -62,6 +72,7 @@ const Footer = () => {
             <Link
               key={item?.id}
               to={item?.link}
+              onClick={scrollToTop}
               className="text-sm md:text-base text-center md:text-right italic hover:text-blue-400"
             >
               {item?.name}
