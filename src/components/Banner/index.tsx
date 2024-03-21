@@ -4,6 +4,13 @@ import SearchInput from "../../utils/search";
 const banner1 = new URL("../../assets/banner/banner.jpg", import.meta.url).href;
 
 const Banner = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div
       style={{ backgroundImage: `url(${banner1})` }}
@@ -17,18 +24,21 @@ const Banner = () => {
         <Link
           className="hover:opacity-60 active:opcity-30 border-b pb-3 hover:border-gray-400 active:border-gray-600"
           to="/new-cars"
+          onClick={scrollToTop}
         >
           Shop New
         </Link>
         <Link
           className="hover:opacity-60 active:opcity-30  border-b pb-3 hover:border-gray-400 active:border-gray-600"
           to="/used-cars"
+          onClick={scrollToTop}
         >
           Shop Used
         </Link>
         <Link
           className="hover:opacity-60 active:opcity-30  border-b pb-3 hover:border-gray-400 active:border-gray-600"
           to="/car-ass"
+          onClick={scrollToTop}
         >
           Shop Assesories
         </Link>
