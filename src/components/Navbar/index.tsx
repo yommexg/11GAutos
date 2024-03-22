@@ -19,6 +19,8 @@ const Navbar: React.FC = () => {
       top: 0,
       behavior: "smooth",
     });
+    toggleMenu();
+    document.body.style.overflow = "";
   };
 
   return (
