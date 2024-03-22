@@ -25,8 +25,8 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
 
       {isMenuOpen && (
         <div className="fixed inset-0 bg-white opacity-90">
-          <div className="absolute cursor-pointer ease-in-out duration-1000 transform-translate-y-0 bg-gray-600 py-5 px-8 top-1 bottom-1 left-0 flex flex-col gap-8">
-            <span className="mt-">
+          <div className="absolute cursor-pointer ease-in-out duration-1000 w-[200px] transform-translate-y-0 bg-gray-600 py-5 px-8 top-0 bottom-0 left-0 flex flex-col gap-8">
+            <span>
               <Logo />
             </span>
             <span
@@ -83,6 +83,9 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               </Link>
             </div>
           </div>
+          <p className="text-white absolute text-[9px] bottom-0 p-4 w-[200px] bg-black">
+            © 2024 11G Autos. All rights reserved.
+          </p>
         </div>
       )}
     </div>
