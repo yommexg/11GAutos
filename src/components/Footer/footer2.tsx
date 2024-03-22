@@ -6,7 +6,7 @@ import { socialLinks } from "./data";
 const Footer2 = () => {
   return (
     <div className="flex flex-col items-center gap-8 my-5 md:flex-row md:justify-between md:px-24">
-      <div className="flex gap-24">
+      <div className="flex gap-8 lg:gap-16">
         {socialLinks.map((item) => (
           <Link to={item?.link} key={item?.id} className="text-xl">
             {item?.icon}
