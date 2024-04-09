@@ -19,6 +19,15 @@ const Navbar: React.FC = () => {
       top: 0,
       behavior: "smooth",
     });
+    // toggleMenu();
+    // document.body.style.overflow = "";
+  };
+
+  const mobileScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     toggleMenu();
     document.body.style.overflow = "";
   };
@@ -30,7 +39,7 @@ const Navbar: React.FC = () => {
           <MobileSidebar
             isMenuOpen={isMenuOpen}
             toggleMenu={toggleMenu}
-            scrollToTop={scrollToTop}
+            scrollToTop={mobileScrollToTop}
           />
           {!isMenuOpen && <Logo />}
           <div className="hidden lg:flex flex-row gap-5 text-sm">
