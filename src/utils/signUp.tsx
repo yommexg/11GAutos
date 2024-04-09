@@ -5,10 +5,12 @@ const SignUpButton = () => {
 
   const handleSignIn = () => {
     setShowModal(true);
+    document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
     setShowModal(false);
+    document.body.style.overflow = "";
   };
 
   return (
