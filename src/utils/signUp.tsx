@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 import Logo from "./logo";
 
@@ -18,12 +18,13 @@ const SignUpButton = () => {
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(true);
 
-  const handleChange = (event) => {
-    setEmail(event.target.value);
-    setIsValid(validateEmail(event.target.value));
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setEmail(value);
+    setIsValid(validateEmail(value));
   };
 
-  const validateEmail = (email) => {
+  const validateEmail = (email: string): boolean => {
     // Regular expression for email validation
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
