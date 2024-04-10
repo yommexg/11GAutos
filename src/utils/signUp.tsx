@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import Logo from "./logo";
+
 const SignUpButton = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -13,6 +15,20 @@ const SignUpButton = () => {
     document.body.style.overflow = "";
   };
 
+  const [email, setEmail] = useState("");
+  const [isValid, setIsValid] = useState(true);
+
+  const handleChange = (event) => {
+    setEmail(event.target.value);
+    setIsValid(validateEmail(event.target.value));
+  };
+
+  const validateEmail = (email) => {
+    // Regular expression for email validation
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
   return (
     <div>
       <button
@@ -24,29 +40,64 @@ const SignUpButton = () => {
 
       {showModal && (
         <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
-          {/*content*/}
-          <div className="border-0 rounded-lg shadow-lg flex flex-col w-[100%] h-full bg-white outline-none focus:outline-none">
-            {/*header*/}
-            <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
-              <h3 className="text-3xl font-semibold">Sign In</h3>
-              <button
-                className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                onClick={closeModal}
-              >
-                <span className="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">
-                  ×
-                </span>
+          <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
+            <p
+              className="absolute top-5 right-5 text-2xl text-white md:text-slate-700 cursor-pointer"
+              onClick={closeModal}
+            >
+              x
+            </p>
+            <div className="md:w-[50%] hidden md:flex flex-col gap-8 pt-24 bg-slate-500 p-20">
+              <Logo />
+              <div>
+                <h2 className="text-white text-3xl font-bold italic">Hello</h2>
+                <h2 className="text-white text-3xl font-bold italic">
+                  Welcome to 11G Autos!
+                </h2>
+              </div>
+              <p className="text-xs text-slate-300">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Dignissimos cumque exercitationem quas laboriosam numquam harum
+                reiciendis, ut temporibus earum esse perspiciatis error repellat
+                hic labore atque minima laborum itaque odio?
+              </p>
+            </div>
+            <div className="md:w-[50%] w-[100%] flex gap-8 flex-col justify-center px-8">
+              <p className="md:hidden block">
+                <Logo />
+              </p>
+              <div>
+                <h2 className="font-bold mb-1 text-lg">
+                  Verify Email Address to Create Account
+                </h2>
+                <p className="text-xs italic text-slate-400">
+                  Enter a valid Email Address
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 lg:w-[50%] ">
+                <label htmlFor="email">Email Address:</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={handleChange}
+                  className=" bg-slate-200 p-2 text-black font-semibold"
+                />
+                {!isValid && (
+                  <p style={{ color: "red" }}>
+                    Please enter a valid email address.
+                  </p>
+                )}
+              </div>
+
+              <button className="p-4 bg-slate-900 text-white hover:opacity-50">
+                Verify Now
               </button>
             </div>
-            {/*body*/}
-            <div className="relative p-6 flex-auto">
-              {/*content goes here*/}
-            </div>
-            {/*footer*/}
-            <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
-              {/*footer content goes here*/}
-            </div>
           </div>
+          <p className=" hidden md:block text-white absolute text-sm w-[50%] bottom-0 text-center p-6 bg-black">
+            © 2024 11G Autos. All rights reserved.
+          </p>
         </div>
       )}
     </div>
