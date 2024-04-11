@@ -1,7 +1,12 @@
 import { ChangeEvent, useState } from "react";
 import LoginBanner from "./loginBanner";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
+import { RootState } from "../../redux/store";
 import Logo from "../../utils/logo";
+import Spinner from "../Spinner";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +14,9 @@ const Login: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
+  // const dispatch = useDispatch();
+
+  const loading = useSelector((state: RootState) => state.login.loading);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -23,11 +31,16 @@ const Login: React.FC = () => {
     setPassword(value);
   };
 
-  const handleVerify = () => {};
+  const handleVerify = () => {
+    if (!email || !password) {
+      toast.error("Please Input all fields");
+    }
+  };
 
   return (
     <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
+        {loading && <Spinner />}
         <p
           className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
           onClick={() => navigate("/")}

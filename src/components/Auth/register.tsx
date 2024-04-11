@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import Logo from "../../utils/logo";
 import LoginBanner from "./loginBanner";
-import Spinner from "../Spinner";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -41,7 +40,6 @@ const Register: React.FC = () => {
   return (
     <div className="fixed z-50 right-0 top-0 inset-0 left-0 bottom-0 outline-none focus:outline-none">
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
-        <Spinner />
         <p
           className="absolute right-5 top-3 text-3xl text-slate-700 cursor-pointer"
           onClick={() => navigate("/")}
