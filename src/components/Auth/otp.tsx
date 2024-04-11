@@ -60,7 +60,7 @@ const OneTimePassword: React.FC = () => {
           x
         </p>
         <LoginBanner />
-        <div className="md:w-[50%] w-[100%] lg:pl-32 flex gap-8 flex-col justify-center px-8">
+        <div className="md:w-[50%] w-[100%] lg:pl-32 flex gap-8 flex-col justify-center px-2 md:px-4">
           <p className="md:hidden block">
             <Logo />
           </p>
@@ -88,7 +88,7 @@ const OneTimePassword: React.FC = () => {
                   onChange={(e) => handleChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   maxLength={1}
-                  className="w-12 h-12 text-center border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                  className="w-9 h-9 text-center border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                 />
               ))}
             </div>
