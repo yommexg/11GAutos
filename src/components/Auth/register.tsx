@@ -38,7 +38,7 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
+    <div className="fixed z-50 right-0 top-0 inset-0 left-0 bottom-0 outline-none focus:outline-none">
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
         <p
           className="absolute right-5 top-3 text-3xl text-slate-700 cursor-pointer"
@@ -58,7 +58,9 @@ const Register: React.FC = () => {
             </p>
           </div>
           <div className="flex flex-col gap-3 lg:w-[80%]">
-            <label htmlFor="username">Username (Minimum 4 Letters):</label>
+            <label htmlFor="username" className="font-bold text-lg">
+              Username (Minimum 4 Letters):
+            </label>
             <input
               type="text"
               id="username"
@@ -69,7 +71,9 @@ const Register: React.FC = () => {
               className="bg-slate-200 p-2 text-black font-semibold"
             />
 
-            <label htmlFor="password">Password: </label>
+            <label htmlFor="password" className="font-bold text-lg">
+              Password:{" "}
+            </label>
             <input
               type="password"
               id="password"
@@ -87,7 +91,9 @@ const Register: React.FC = () => {
               </p>
             )}
 
-            <label htmlFor="address">Address:</label>
+            <label htmlFor="address" className="font-bold text-lg">
+              Address:
+            </label>
             <input
               type="text"
               placeholder="House No"
@@ -124,7 +130,9 @@ const Register: React.FC = () => {
               className="bg-slate-200 p-2 text-black font-semibold"
             />
 
-            <label htmlFor="phoneNumber">Phone Number:</label>
+            <label htmlFor="phoneNumber" className="font-bold text-lg">
+              Phone Number:
+            </label>
             <input
               type="tel"
               id="phoneNumber"
