@@ -81,7 +81,7 @@ const Login: React.FC = () => {
           >
             Login
           </button>
-          <div className="flex justify-between flex-col md:gap-4 mx-5 md:mx-0">
+          <div className="flex justify-between flex-col gap-4 mx-5 md:mx-0">
             <p className="text-xs italic">
               Dont have an account?{" "}
               <Link
