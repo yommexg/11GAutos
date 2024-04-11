@@ -60,7 +60,7 @@ const OneTimePassword: React.FC = () => {
           x
         </p>
         <LoginBanner />
-        <div className="md:w-[50%] w-[100%] lg:pl-32 flex gap-8 flex-col justify-center px-2 md:px-4">
+        <div className="md:w-[50%] w-[100%] lg:pl-32 flex gap-8 flex-col justify-center px-8 md:px-4">
           <p className="md:hidden block">
             <Logo />
           </p>
@@ -95,7 +95,7 @@ const OneTimePassword: React.FC = () => {
           </div>
 
           <button
-            className="p-4 bg-slate-900 md:w-[50%] text-white hover:opacity-50"
+            className="p-4 bg-slate-900 w-[50%] text-white hover:opacity-50"
             onClick={handleVerifyOTP}
           >
             Verify OTP
