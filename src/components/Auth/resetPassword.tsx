@@ -1,10 +1,10 @@
-import { ChangeEvent, useState } from "react";
-import LoginBanner from "./loginBanner";
-import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../utils/logo";
+import { useState, ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login: React.FC = () => {
-  const [email, setEmail] = useState("");
+import Logo from "../../utils/logo";
+import LoginBanner from "./loginBanner";
+
+const ResetPassword: React.FC = () => {
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -14,16 +14,12 @@ const Login: React.FC = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const { value } = event.target;
-    setEmail(value);
-  };
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
     setPassword(value);
   };
 
-  const handleVerify = () => {};
+  const handleReset = () => {};
 
   return (
     <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
@@ -40,22 +36,11 @@ const Login: React.FC = () => {
             <Logo />
           </p>
           <div>
-            <h2 className="font-bold mb-3 text-3xl">LOGIN</h2>
+            <h2 className="font-bold mb-3 text-2xl">Reset Password</h2>
             <p className="text-xs italic text-slate-400">
-              Login to enjoy full experience
+              Make sure the password contains:
             </p>
           </div>
-          <div className="flex flex-col gap-3 lg:w-[50%]">
-            <label htmlFor="email">Email Address:</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={handleEmailChange}
-              className="bg-slate-200 p-2 text-black font-semibold"
-            />
-          </div>
-
           <div className="flex flex-col gap-3 lg:w-[50%]">
             <label htmlFor="password">Password:</label>
             <div className="relative">
@@ -76,31 +61,11 @@ const Login: React.FC = () => {
           </div>
 
           <button
-            className="p-4 bg-slate-900 text-white hover:opacity-50 md:w-[50%]"
-            onClick={handleVerify}
+            className="p-4 bg-slate-900 md:w-[50%] text-white hover:opacity-50"
+            onClick={handleReset}
           >
-            Login
+            Submit
           </button>
-          <div className="flex justify-between md:flex-col md:gap-4 mx-5 md:mx-0">
-            <p className="text-xs italic">
-              Dont have an account?{" "}
-              <Link
-                to="/verify-email"
-                className="text-base font-semibold not-italic ml-1 hover:text-slate-400 underline"
-              >
-                Register{" "}
-              </Link>
-            </p>
-            <p className="text-xs italic">
-              Forgot Passowrd?{" "}
-              <Link
-                to="/forgot-password"
-                className="text-base font-semibold not-italic ml-1 hover:text-slate-400 underline"
-              >
-                Click Here
-              </Link>
-            </p>
-          </div>
         </div>
       </div>
       <p className=" hidden md:block text-white absolute text-sm w-[50%] bottom-0 text-center p-6 bg-black">
@@ -110,4 +75,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;

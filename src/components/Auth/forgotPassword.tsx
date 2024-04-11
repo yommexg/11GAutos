@@ -1,22 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../utils/logo";
 import LoginBanner from "./loginBanner";
 import { useState, ChangeEvent } from "react";
 
-const ForgotPassword = () => {
+const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
     setEmail(value);
   };
 
-  const handleSendOTP = () => {};
+  const handleSendOTP = () => {
+    navigate("/forgot-otp");
+  };
   return (
     <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
+        <p
+          className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          x
+        </p>
         <LoginBanner />
-        <div className="md:w-[50%] w-[100%] md:pl-32 flex gap-8 flex-col justify-center px-8">
+        <div className="md:w-[50%] w-[100%] lg:pl-32 flex gap-8 flex-col justify-center px-8">
           <p className="md:hidden block">
             <Logo />
           </p>
@@ -41,7 +51,7 @@ const ForgotPassword = () => {
             className="p-4 bg-slate-900 md:w-[50%] text-white hover:opacity-50"
             onClick={handleSendOTP}
           >
-            Send OTP
+            Click to Send OTP
           </button>
           <p className="text-xs italic">
             Remember Password?{" "}

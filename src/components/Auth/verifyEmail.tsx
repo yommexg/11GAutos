@@ -3,7 +3,7 @@ import Logo from "../../utils/logo";
 import { Link, useNavigate } from "react-router-dom";
 import LoginBanner from "./loginBanner";
 
-const VerifyEmail = () => {
+const VerifyEmail: React.FC = () => {
   const [isValid, setIsValid] = useState(true);
   const [email, setEmail] = useState("");
 
@@ -21,14 +21,22 @@ const VerifyEmail = () => {
   };
 
   const handleVerify = () => {
-    navigate("/otp");
+    navigate("/otp", {
+      state: { email: email },
+    });
   };
 
   return (
     <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
+        <p
+          className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          x
+        </p>
         <LoginBanner />
-        <div className="md:w-[50%] w-[100%] md:pl-32 flex gap-8 flex-col justify-center px-8">
+        <div className="md:w-[50%] w-[100%] lg:pl-32 flex gap-8 flex-col justify-center px-8">
           <p className="md:hidden block">
             <Logo />
           </p>
@@ -60,7 +68,7 @@ const VerifyEmail = () => {
             className="p-4 bg-slate-900 md:w-[50%] text-white hover:opacity-50"
             onClick={handleVerify}
           >
-            Verify Now
+            Click to Send OTP
           </button>
           <p className="text-xs italic">
             Already have an account?{" "}

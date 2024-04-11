@@ -1,16 +1,12 @@
 import React, { useState, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../utils/logo";
 import LoginBanner from "./loginBanner";
 
-const OneTimePassword: React.FC = () => {
+const ForgotOTP: React.FC = () => {
+  const navigate = useNavigate();
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const inputRefs = useRef<HTMLInputElement[]>([]);
-
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const email = (location.state as { email: string }).email;
 
   const handleVerifyOTP = () => {
     const enteredOTP = otp.join("");
@@ -18,11 +14,8 @@ const OneTimePassword: React.FC = () => {
     //   alert("Please enter a valid 6-digit OTP");
     //   return;
     // }
-
     console.log(enteredOTP);
-    navigate("/register", {
-      state: { email: email },
-    });
+    navigate("/reset-password");
   };
 
   const handleChange = (index: number, value: string) => {
@@ -66,7 +59,7 @@ const OneTimePassword: React.FC = () => {
           </p>
           <div>
             <h2 className="font-bold mb-3 text-2xl">
-              Verify OTP to Continue Registration
+              Verify OTP to Change Password
             </h2>
             <p className="text-xs italic text-slate-400">
               Enter the otp code (6 digit code) sent to your email address
@@ -109,4 +102,4 @@ const OneTimePassword: React.FC = () => {
   );
 };
 
-export default OneTimePassword;
+export default ForgotOTP;

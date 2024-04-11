@@ -12,8 +12,10 @@ import SellCars from "./containers/SellCars";
 import Login from "./components/Auth/login";
 import VerifyEmail from "./components/Auth/verifyEmail";
 import ForgotPassword from "./components/Auth/forgotPassword";
+import ForgotOTP from "./components/Auth/forgotOTP";
 import OneTimePassword from "./components/Auth/otp";
 import Register from "./components/Auth/register";
+import ResetPassword from "./components/Auth/resetPassword";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/otp" element={<OneTimePassword />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-otp" element={<ForgotOTP />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </div>
       <Footer />
