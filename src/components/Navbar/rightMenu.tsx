@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaAngleDown } from "react-icons/fa";
 
-import { RootState } from "../../redux/store";
+import { RootState, useAppDispatch } from "../../redux/store";
 import { User } from "../../../types";
 import SignUpButton from "../../utils/signUp";
+import { logoutAsync } from "../../redux/slice/logoutSlice";
 
 interface RightMenuProps {
   isMenuOpen: boolean;
@@ -17,10 +18,13 @@ const RightMenu: React.FC<RightMenuProps> = ({
   scrollToTop,
   isMenuOpen,
 }) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const loading = useSelector((state: RootState) => state.getUser.loading);
 
   const userData = useSelector(
-    (state: RootState) => state?.getUser?.userData as User
+    (state: RootState) => state.getUser.userData as User
   );
 
   const openMenu = () => {
@@ -33,8 +37,16 @@ const RightMenu: React.FC<RightMenuProps> = ({
     document.body.style.overflow = "";
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     closeMenu();
+
+    await dispatch(
+      logoutAsync({
+        extra: {
+          navigate,
+        },
+      })
+    );
   };
 
   return (
@@ -56,8 +68,8 @@ const RightMenu: React.FC<RightMenuProps> = ({
             </div>
           )}
       {isMenuOpen && (
-        <div className="z-50 fixed inset-0  bg-white opacity-90">
-          <div className="absolute right-0 top-0 bottom:-0 min-w-[200px] md:min-w-[250px] px-4 bg-gray-600 shadow-2xl py-4 rounded-tl-lg rounded-bl-lg ">
+        <div className="z-50 fixed inset-0  bg-slate-400 opacity-90">
+          <div className="absolute right-0 top-0 bottom:-0 min-w-[200px] md:min-w-[250px] px-4 bg-slate-900 shadow-2xl py-4 rounded-tl-lg rounded-bl-lg ">
             <div className="flex items-center gap-2 my-4">
               <img
                 src={userData.avatar}
@@ -65,14 +77,14 @@ const RightMenu: React.FC<RightMenuProps> = ({
                 className="h-10 w-10 rounded-full"
               />
               <div>
-                <p className="text-black font-bold">{userData.username}</p>
-                <p className="text-black font-bold text-[9px]">
+                <p className="text-slate-400 font-bold">{userData.username}</p>
+                <p className="text-slate-600 font-bold text-[9px]">
                   {userData.email}
                 </p>
               </div>
             </div>
             <p
-              className="absolute top-0 right-3 font-bold text-2xl cursor-pointer"
+              className="absolute top-0 right-3 font-bold text-2xl text-white cursor-pointer"
               onClick={closeMenu}
             >
               x

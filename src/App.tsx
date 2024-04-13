@@ -19,6 +19,7 @@ import ForgotOTP from "./components/Auth/forgotOTP";
 import OneTimePassword from "./components/Auth/otp";
 import Register from "./components/Auth/register";
 import ResetPassword from "./components/Auth/resetPassword";
+import Logout from "./components/Auth/logout";
 
 import { AppDispatch, RootState } from "./redux/store";
 import { getUser } from "./redux/slice/getUserSlice";
@@ -32,6 +33,7 @@ interface JwtPayload {
 
 function App() {
   const loading = useSelector((state: RootState) => state.getUser.loading);
+  const loading2 = useSelector((state: RootState) => state.logout.loading);
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -54,7 +56,7 @@ function App() {
 
   return (
     <>
-      {loading && <Spinner />}
+      {(loading || loading2) && <Spinner />}
 
       <Navbar />
       <div className="mt-[80px]">
@@ -71,6 +73,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-otp" element={<ForgotOTP />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </div>
       <Footer />

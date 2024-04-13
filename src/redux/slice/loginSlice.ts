@@ -23,9 +23,6 @@ interface UserInfo {
 interface JwtPayload {
   UserInfo: UserInfo;
 }
-interface JwtPayload {
-  UserInfo: UserInfo;
-}
 
 interface ExtraArgs {
   navigate: ReturnType<typeof useNavigate>;
@@ -66,9 +63,7 @@ export const loginAsync = createAsyncThunk(
       await dispatch(getUser({ userId, accessToken: data?.accessToken }));
 
       toast.success(data?.message);
-      navigate("/", {
-        state: { accessToken: data?.accessToken, userId: userId },
-      });
+      navigate("/");
       dispatch(getLoginComplete());
     } catch (error) {
       // console.log("Login Error", error);
@@ -88,16 +83,6 @@ export const loginAsync = createAsyncThunk(
     }
   }
 );
-
-// export const refreshToken = async () => {
-//   try {
-//     const response = await axiosReq.get("/refresh");
-//     // console.log(response.data.accessToken);
-//     return response.data.accessToken;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 const initialState: LoginState = {
   loading: false,
