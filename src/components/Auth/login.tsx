@@ -4,17 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-import { RootState } from "../../redux/store";
+import { RootState, useAppDispatch } from "../../redux/store";
 import Logo from "../../utils/logo";
 import Spinner from "../Spinner";
+import { loginAsync } from "../../redux/slice/loginSlice";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const loading = useSelector((state: RootState) => state.login.loading);
 
@@ -34,6 +35,16 @@ const Login: React.FC = () => {
   const handleVerify = () => {
     if (!email || !password) {
       toast.error("Please Input all fields");
+    } else {
+      dispatch(
+        loginAsync({
+          email,
+          pwd: password,
+          extra: {
+            navigate,
+          },
+        })
+      );
     }
   };
 

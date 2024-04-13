@@ -1,14 +1,23 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import Logo from "../../utils/logo";
 import SearchInput from "../../utils/search";
 import SignUpButton from "../../utils/signUp";
 import MobileSidebar from "./mobileSidebar";
+import { RootState } from "../../redux/store";
+import { User } from "../../../types";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+
+  const loading = useSelector((state: RootState) => state.getUser.loading);
+
+  const userData = useSelector(
+    (state: RootState) => state?.getUser?.userData as User
+  );
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -94,7 +103,13 @@ const Navbar: React.FC = () => {
           <div className="hidden sm:block">
             <SearchInput />
           </div>
-          <SignUpButton />
+          {Object.entries(userData)?.length === 0 ? (
+            !loading && <SignUpButton />
+          ) : (
+            <div>
+              <h5>{userData.username}</h5>
+            </div>
+          )}
         </div>
       </div>
     </nav>
