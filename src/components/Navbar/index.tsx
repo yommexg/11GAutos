@@ -1,26 +1,23 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 import Logo from "../../utils/logo";
 import SearchInput from "../../utils/search";
-import SignUpButton from "../../utils/signUp";
 import MobileSidebar from "./mobileSidebar";
-import { RootState } from "../../redux/store";
-import { User } from "../../../types";
+import RightMenu from "./rightMenu";
 
 const Navbar: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLeftMenuOpen, setIsLeftMenuOpen] = useState(false);
+  const [isRightMenuOpen, setIsRightMenuOpen] = useState(false);
+
   const location = useLocation();
 
-  const loading = useSelector((state: RootState) => state.getUser.loading);
+  const toggleLeftMenu = () => {
+    setIsLeftMenuOpen(!isLeftMenuOpen);
+  };
 
-  const userData = useSelector(
-    (state: RootState) => state?.getUser?.userData as User
-  );
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const toggleRightMenu = () => {
+    setIsRightMenuOpen(!isRightMenuOpen);
   };
 
   const scrollToTop = () => {
@@ -28,8 +25,6 @@ const Navbar: React.FC = () => {
       top: 0,
       behavior: "smooth",
     });
-    // toggleMenu();
-    // document.body.style.overflow = "";
   };
 
   const mobileScrollToTop = () => {
@@ -37,7 +32,16 @@ const Navbar: React.FC = () => {
       top: 0,
       behavior: "smooth",
     });
-    toggleMenu();
+    toggleLeftMenu();
+    document.body.style.overflow = "";
+  };
+
+  const rightMenuScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    toggleRightMenu();
     document.body.style.overflow = "";
   };
 
@@ -46,11 +50,11 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex gap-5 lg:gap-12 items-center">
           <MobileSidebar
-            isMenuOpen={isMenuOpen}
-            toggleMenu={toggleMenu}
+            isMenuOpen={isLeftMenuOpen}
+            toggleMenu={toggleLeftMenu}
             scrollToTop={mobileScrollToTop}
           />
-          {!isMenuOpen && <Logo />}
+          {!isLeftMenuOpen && <Logo />}
           <div className="hidden lg:flex flex-row gap-5 text-sm">
             <Link
               to="/"
@@ -100,16 +104,16 @@ const Navbar: React.FC = () => {
           </div>
         </div>
         <div className="sm:flex flex-row items-center gap-5 ">
-          <div className="hidden sm:block">
+          <div
+            className={`hidden sm:block ${isRightMenuOpen ? "mr-40" : "mr-10"}`}
+          >
             <SearchInput />
           </div>
-          {Object.entries(userData)?.length === 0 ? (
-            !loading && <SignUpButton />
-          ) : (
-            <div>
-              <h5>{userData.username}</h5>
-            </div>
-          )}
+          <RightMenu
+            isMenuOpen={isRightMenuOpen}
+            scrollToTop={rightMenuScrollToTop}
+            toggleMenu={toggleRightMenu}
+          />
         </div>
       </div>
     </nav>

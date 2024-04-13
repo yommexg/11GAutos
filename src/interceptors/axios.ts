@@ -37,6 +37,7 @@ const createAxiosPrivate = (): AxiosInstance => {
         console.log(response);
         if (response.status === 200) {
           accessToken = response.data?.accessToken;
+          localStorage.setItem("accessToken", response.data?.accessToken);
           error.config.headers["Authorization"] = `Bearer ${accessToken}`;
           return axios.request(error.config);
         }

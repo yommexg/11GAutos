@@ -23,6 +23,9 @@ interface UserInfo {
 interface JwtPayload {
   UserInfo: UserInfo;
 }
+interface JwtPayload {
+  UserInfo: UserInfo;
+}
 
 interface ExtraArgs {
   navigate: ReturnType<typeof useNavigate>;
@@ -52,6 +55,8 @@ export const loginAsync = createAsyncThunk(
 
       const decodedToken = jwtDecode<JwtPayload>(data?.accessToken);
 
+      localStorage.setItem("accessToken", data?.accessToken);
+
       const userId = decodedToken?.UserInfo?._id;
 
       axiosPrivate.defaults.headers.common[
@@ -67,7 +72,7 @@ export const loginAsync = createAsyncThunk(
       dispatch(getLoginComplete());
     } catch (error) {
       // console.log("Login Error", error);
-      let errorMessage = "Network Error!";
+      let errorMessage = "Network Error";
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError<LoginError>;
         if (axiosError.response && axiosError.response.status === 401) {

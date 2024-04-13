@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Navbar from "./components/Navbar";
@@ -22,24 +22,26 @@ import ResetPassword from "./components/Auth/resetPassword";
 
 import { AppDispatch, RootState } from "./redux/store";
 import { getUser } from "./redux/slice/getUserSlice";
+import { jwtDecode } from "jwt-decode";
+
+interface JwtPayload {
+  UserInfo?: {
+    _id: string;
+  };
+}
 
 function App() {
-  const location = useLocation();
-
   const loading = useSelector((state: RootState) => state.getUser.loading);
 
   const dispatch: AppDispatch = useDispatch();
-  const userId =
-    location.state && location.state.userId
-      ? (location.state as { userId: string }).userId
-      : null;
-
-  const accessToken =
-    location.state && location.state.accessToken
-      ? (location.state as { accessToken: string }).accessToken
-      : null;
 
   useEffect(() => {
+    const accessToken: string | null = localStorage.getItem("accessToken");
+    const decodedToken: JwtPayload | null = accessToken
+      ? jwtDecode<JwtPayload>(accessToken)
+      : null;
+    const userId: string | undefined = decodedToken?.UserInfo?._id;
+
     if (accessToken && userId) {
       dispatch(
         getUser({
@@ -48,7 +50,8 @@ function App() {
         })
       );
     }
-  }, [dispatch, accessToken, userId]);
+  }, [dispatch]);
+
   return (
     <>
       {loading && <Spinner />}
