@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Navbar from "./components/Navbar";
@@ -24,6 +24,7 @@ import Logout from "./components/Auth/logout";
 import { AppDispatch, RootState } from "./redux/store";
 import { getUser } from "./redux/slice/getUserSlice";
 import { jwtDecode } from "jwt-decode";
+import { User } from "../types";
 
 interface JwtPayload {
   UserInfo?: {
@@ -36,6 +37,12 @@ function App() {
   const loading2 = useSelector((state: RootState) => state.logout.loading);
 
   const dispatch: AppDispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const userData = useSelector(
+    (state: RootState) => state.getUser.userData as User
+  );
 
   useEffect(() => {
     const accessToken: string | null = localStorage.getItem("accessToken");
@@ -65,11 +72,18 @@ function App() {
           <Route path="/new-cars" element={<NewCars />} />
           <Route path="/used-cars" element={<UsedCars />} />
           <Route path="/car-ass" element={<CarAssesories />} />
+          {Object.entries(userData)?.length !== 0 &&
+          location.pathname === "/login" ? (
+            (navigate("/"), null)
+          ) : (
+            <>
+              <Route path="/login" element={<Login />} />
+            </>
+          )}
           <Route path="/sell-car" element={<SellCars />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/otp" element={<OneTimePassword />} />
+          <Route path="/register-otp" element={<OneTimePassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-otp" element={<ForgotOTP />} />
           <Route path="/reset-password" element={<ResetPassword />} />

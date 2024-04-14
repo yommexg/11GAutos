@@ -1,13 +1,22 @@
 import { ChangeEvent, useState } from "react";
-import Logo from "../../utils/logo";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import Logo from "../../utils/logo";
 import LoginBanner from "./loginBanner";
+import { RootState, useAppDispatch } from "../../redux/store";
+import { verifyEmailAsync } from "../../redux/slice/registerSlice";
+import Spinner from "../Spinner";
 
 const VerifyEmail: React.FC = () => {
   const [isValid, setIsValid] = useState(true);
   const [email, setEmail] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const loading = useSelector((state: RootState) => state.register.loading);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
@@ -20,15 +29,28 @@ const VerifyEmail: React.FC = () => {
     return re.test(email);
   };
 
-  const handleVerify = () => {
-    navigate("/otp", {
-      state: { email: email },
-    });
+  const handleVerify = async () => {
+    if (!email) {
+      toast.error("Please Enter Email Address");
+    } else if (!isValid) {
+      toast.error("Invalid Email Address");
+    } else {
+      await dispatch(
+        verifyEmailAsync({
+          email: email,
+          extra: {
+            navigate,
+          },
+        })
+      );
+    }
   };
 
   return (
     <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
+        {loading && <Spinner />}
+
         <p
           className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
           onClick={() => navigate("/")}
@@ -36,10 +58,10 @@ const VerifyEmail: React.FC = () => {
           x
         </p>
         <LoginBanner />
-        <div className="md:w-[50%] w-[100%] lg:pl-32 flex gap-8 flex-col justify-center px-8">
-          <p className="md:hidden block">
+        <div className="md:w-[50%] w-[100%] lg:pl-20 flex gap-8 flex-col justify-center px-8">
+          <div className="md:hidden block">
             <Logo />
-          </p>
+          </div>
           <div>
             <h2 className="font-bold mb-3 text-2xl">
               Verify Email Address to Create Account

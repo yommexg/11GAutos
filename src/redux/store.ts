@@ -1,15 +1,17 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { thunk } from "redux-thunk";
+import { useDispatch } from "react-redux";
 
 import loginSlice from "./slice/loginSlice";
 import logoutSlice from "./slice/logoutSlice";
 import getUserSlice from "./slice/getUserSlice";
-import { useDispatch } from "react-redux";
+import registerSlice from "./slice/registerSlice";
 
 const rootReducer = combineReducers({
   login: loginSlice.reducer,
   getUser: getUserSlice.reducer,
   logout: logoutSlice.reducer,
+  register: registerSlice.reducer,
 });
 
 const store = configureStore({

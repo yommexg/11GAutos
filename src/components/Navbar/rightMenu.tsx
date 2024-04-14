@@ -7,6 +7,8 @@ import { User } from "../../../types";
 import SignUpButton from "../../utils/signUp";
 import { logoutAsync } from "../../redux/slice/logoutSlice";
 
+const noAvatar = new URL("../../assets/noAvatar.png", import.meta.url).href;
+
 interface RightMenuProps {
   isMenuOpen: boolean;
   toggleMenu: () => void;
@@ -59,11 +61,11 @@ const RightMenu: React.FC<RightMenuProps> = ({
               onClick={openMenu}
             >
               <img
-                src={userData.avatar}
+                src={userData.avatar ? userData.avatar : noAvatar}
                 alt={userData.username}
-                className="h-10 w-10 rounded-full"
+                className="h-10 w-10  rounded-full"
               />
-              <p className="hidden lg:block">{userData.username}</p>
+              <p className="hidden text-sm lg:block">{userData.username}</p>
               <FaAngleDown />
             </div>
           )}
@@ -72,7 +74,7 @@ const RightMenu: React.FC<RightMenuProps> = ({
           <div className="absolute right-0 top-0 bottom:-0 min-w-[200px] md:min-w-[250px] px-4 bg-slate-900 shadow-2xl py-4 rounded-tl-lg rounded-bl-lg ">
             <div className="flex items-center gap-2 my-4">
               <img
-                src={userData.avatar}
+                src={userData.avatar ? userData.avatar : noAvatar}
                 alt={userData.username}
                 className="h-10 w-10 rounded-full"
               />
@@ -89,14 +91,22 @@ const RightMenu: React.FC<RightMenuProps> = ({
             >
               x
             </p>
-            <div className="flex flex-col gap-4 mb-10 text-white font-semibold">
-              <Link to="/" onClick={scrollToTop}>
+            <div className="flex flex-col gap-4 mb-10 text-white font-semibold ">
+              <Link to="/" onClick={scrollToTop} className="hover:opacity-50">
                 Profile
               </Link>
-              <Link to="/orders" onClick={scrollToTop}>
+              <Link
+                to="/orders"
+                className="hover:opacity-50"
+                onClick={scrollToTop}
+              >
                 Your Orders
               </Link>
-              <Link to="/settings" onClick={scrollToTop}>
+              <Link
+                to="/settings"
+                className="hover:opacity-50"
+                onClick={scrollToTop}
+              >
                 Settings
               </Link>
             </div>
@@ -104,7 +114,7 @@ const RightMenu: React.FC<RightMenuProps> = ({
             <div className="text-center">
               <button
                 onClick={handleSignOut}
-                className="px-5 py-2 bg-black text-white font-semibold"
+                className="px-5 py-2 bg-black text-white font-semibold hover:opacity-70 hover:bg-slate-600"
               >
                 Sign Out
               </button>

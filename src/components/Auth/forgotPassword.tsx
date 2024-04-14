@@ -27,9 +27,9 @@ const ForgotPassword: React.FC = () => {
         </p>
         <LoginBanner />
         <div className="md:w-[50%] w-[100%] lg:pl-32 flex gap-8 flex-col justify-center px-8">
-          <p className="md:hidden block">
+          <div className="md:hidden block">
             <Logo />
-          </p>
+          </div>
           <div>
             <h2 className="font-bold mb-3 text-2xl">Forgot Password</h2>
             <p className="text-xs italic text-slate-400">

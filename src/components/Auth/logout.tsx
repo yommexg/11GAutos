@@ -19,15 +19,21 @@ const Logout: React.FC = () => {
     <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
         {loading && <Spinner />}
+        <p
+          className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          x
+        </p>
 
         <LoginBanner />
         <div className="md:w-[50%] w-[100%] lg:pl-32 flex gap-8 flex-col justify-center px-8">
-          <p className="md:hidden block">
+          <div className="md:hidden block">
             <Logo />
-          </p>
+          </div>
           <div>
             <h2 className="font-bold mb-3 text-3xl">LOGGED OUT</h2>
-            <p className="text-xs italic text-slate-400">
+            <p className="text-xs italic text-slate-300">
               Thank You, You have been sucessfully logged out of 11GAutos
             </p>
             <button

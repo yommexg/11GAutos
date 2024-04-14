@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import LoginBanner from "./loginBanner";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -10,7 +10,11 @@ import Spinner from "../Spinner";
 import { loginAsync } from "../../redux/slice/loginSlice";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
+  const location = useLocation();
+
+  const regNewEmail = (location?.state as { email: string })?.email;
+
+  const [email, setEmail] = useState<string>(regNewEmail ? regNewEmail : "");
   const [password, setPassword] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -60,9 +64,9 @@ const Login: React.FC = () => {
         </p>
         <LoginBanner />
         <div className="md:w-[50%] w-[100%] lg:pl-32 flex gap-8 flex-col justify-center px-8">
-          <p className="md:hidden block">
+          <div className="md:hidden block">
             <Logo />
-          </p>
+          </div>
           <div>
             <h2 className="font-bold mb-3 text-3xl">LOGIN</h2>
             <p className="text-xs italic text-slate-400">
