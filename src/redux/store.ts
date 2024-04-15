@@ -6,12 +6,14 @@ import loginSlice from "./slice/loginSlice";
 import logoutSlice from "./slice/logoutSlice";
 import getUserSlice from "./slice/getUserSlice";
 import registerSlice from "./slice/registerSlice";
+import forgotSlice from "./slice/forgotPasswordSlice.";
 
 const rootReducer = combineReducers({
   login: loginSlice.reducer,
   getUser: getUserSlice.reducer,
   logout: logoutSlice.reducer,
   register: registerSlice.reducer,
+  forgot: forgotSlice.reducer,
 });
 
 const store = configureStore({

@@ -67,7 +67,7 @@ export const loginAsync = createAsyncThunk(
       dispatch(getLoginComplete());
     } catch (error) {
       // console.log("Login Error", error);
-      let errorMessage = "Network Error";
+      let errorMessage = "Nework Error, Try Again!!";
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError<LoginError>;
         if (axiosError.response && axiosError.response.status === 401) {

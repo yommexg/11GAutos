@@ -1,24 +1,46 @@
+import { useState, ChangeEvent } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+
 import Logo from "../../utils/logo";
 import LoginBanner from "./loginBanner";
-import { useState, ChangeEvent } from "react";
+import Spinner from "../Spinner";
+import { RootState, useAppDispatch } from "../../redux/store";
+import { verifyForgotEmailAsync } from "../../redux/slice/forgotPasswordSlice.";
+import { toast } from "react-toastify";
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState("");
 
+  const loading = useSelector((state: RootState) => state.forgot.loading);
+
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
     setEmail(value);
   };
 
-  const handleSendOTP = () => {
-    navigate("/forgot-otp");
+  const handleSendOTP = async () => {
+    if (!email) {
+      toast.error("Input Registered Email Address");
+    } else {
+      await dispatch(
+        verifyForgotEmailAsync({
+          email: email,
+          extra: {
+            navigate,
+          },
+        })
+      );
+    }
   };
   return (
     <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
+        {loading && <Spinner />}
+
         <p
           className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
           onClick={() => navigate("/")}

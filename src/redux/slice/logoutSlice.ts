@@ -39,7 +39,7 @@ export const logoutAsync = createAsyncThunk(
       window.location.reload();
     } catch (error) {
       // console.log("Logout Error", error);
-      let errorMessage = "Network Error";
+      let errorMessage = "Nework Error, Try Again!!";
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError<LogoutError>;
         if (axiosError.response && axiosError.response.status === 404) {

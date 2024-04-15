@@ -1,21 +1,45 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../utils/logo";
 import LoginBanner from "./loginBanner";
+import { toast } from "react-toastify";
+import { verifyForgotOTPAsync } from "../../redux/slice/forgotPasswordSlice.";
+import { RootState, useAppDispatch } from "../../redux/store";
+import { useSelector } from "react-redux";
+import Spinner from "../Spinner";
 
 const ForgotOTP: React.FC = () => {
-  const navigate = useNavigate();
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useAppDispatch();
+
+  const email = (location.state as { email: string }).email;
+
+  const loading = useSelector((state: RootState) => state.forgot.loading);
+
   const handleVerifyOTP = () => {
     const enteredOTP = otp.join("");
-    // if (enteredOTP.length !== 6 || !/^\d+$/.test(enteredOTP)) {
-    //   alert("Please enter a valid 6-digit OTP");
-    //   return;
-    // }
-    console.log(enteredOTP);
-    navigate("/reset-password");
+
+    const hasEmpty = otp.some((element) => element === "");
+
+    if (!enteredOTP) {
+      toast.error("Enter OTP!!");
+    } else if (hasEmpty) {
+      toast.error("OTP is Not Complete");
+    } else {
+      dispatch(
+        verifyForgotOTPAsync({
+          email: email,
+          OTP: enteredOTP,
+          extra: {
+            navigate,
+          },
+        })
+      );
+    }
   };
 
   const handleChange = (index: number, value: string) => {
@@ -46,6 +70,7 @@ const ForgotOTP: React.FC = () => {
   return (
     <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
+        {loading && <Spinner />}
         <p
           className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
           onClick={() => navigate("/")}
@@ -81,14 +106,13 @@ const ForgotOTP: React.FC = () => {
                   onChange={(e) => handleChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   maxLength={1}
-                  className="w-12 h-12 text-center border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                  className="w-9 h-9 text-center border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                 />
               ))}
             </div>
           </div>
-
           <button
-            className="p-4 bg-slate-900 md:w-[50%] text-white hover:opacity-50"
+            className="p-4 bg-slate-900 w-[50%] text-white hover:opacity-50"
             onClick={handleVerifyOTP}
           >
             Verify OTP

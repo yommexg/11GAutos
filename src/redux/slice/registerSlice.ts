@@ -42,7 +42,7 @@ export const verifyEmailAsync = createAsyncThunk(
       dispatch(getRegisterComplete());
     } catch (error) {
       // console.log("Verify Email Error", error);
-      let errorMessage = "Network Error";
+      let errorMessage = "Nework Error, Try Again!!";
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError<RegisterError>;
         if (axiosError.response && axiosError.response.status === 409) {
@@ -84,7 +84,7 @@ export const verifyOTPAsync = createAsyncThunk(
       dispatch(getRegisterComplete());
     } catch (error) {
       // console.log("Verify Email Error", error);
-      let errorMessage = "Network Error";
+      let errorMessage = "Nework Error, Try Again!!";
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError<RegisterError>;
         if (axiosError.response && axiosError.response.data) {
@@ -118,7 +118,7 @@ export const registerUser = createAsyncThunk(
         address: userData.address,
       });
 
-      console.log(data);
+      // console.log(data);
 
       toast.success(data?.success);
 
@@ -129,7 +129,7 @@ export const registerUser = createAsyncThunk(
       dispatch(getRegisterComplete());
     } catch (error) {
       console.log("Registration Error", error);
-      let errorMessage = "Network Error";
+      let errorMessage = "Nework Error, Try Again!!";
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError<RegisterError>;
         if (axiosError.response && axiosError.response.data) {
