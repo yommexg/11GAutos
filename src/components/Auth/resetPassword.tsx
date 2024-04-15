@@ -8,6 +8,7 @@ import LoginBanner from "./loginBanner";
 import { RootState, useAppDispatch } from "../../redux/store";
 import Spinner from "../Spinner";
 import { resetPassword } from "../../redux/slice/forgotPasswordSlice.";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const ResetPassword: React.FC = () => {
   const [password, setPassword] = useState("");
@@ -62,7 +63,10 @@ const ResetPassword: React.FC = () => {
         {loading && <Spinner />}
         <p
           className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            scrollToTop();
+          }}
         >
           x
         </p>

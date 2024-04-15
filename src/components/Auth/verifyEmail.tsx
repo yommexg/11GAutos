@@ -8,6 +8,7 @@ import LoginBanner from "./loginBanner";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { verifyEmailAsync } from "../../redux/slice/registerSlice";
 import Spinner from "../Spinner";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const VerifyEmail: React.FC = () => {
   const [isValid, setIsValid] = useState(true);
@@ -50,10 +51,12 @@ const VerifyEmail: React.FC = () => {
     <div className="fixed z-50 right-0 top-0 left-0 bottom-0 outline-none focus:outline-none">
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
         {loading && <Spinner />}
-
         <p
           className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            scrollToTop();
+          }}
         >
           x
         </p>

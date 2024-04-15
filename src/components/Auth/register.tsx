@@ -9,6 +9,7 @@ import { RootState, useAppDispatch } from "../../redux/store";
 import { registerUser } from "../../redux/slice/registerSlice";
 import { Address } from "../../../types";
 import Spinner from "../Spinner";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -105,8 +106,11 @@ const Register: React.FC = () => {
       <div className="border-0 rounded-lg shadow-lg flex w-[100%] h-full bg-slate-500 md:bg-white outline-none focus:outline-none">
         {loading && <Spinner />}
         <p
-          className="absolute right-5 top-3 text-3xl text-slate-700 cursor-pointer"
-          onClick={() => navigate("/")}
+          className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
+          onClick={() => {
+            navigate("/");
+            scrollToTop();
+          }}
         >
           x
         </p>

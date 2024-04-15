@@ -8,6 +8,7 @@ import LoginBanner from "./loginBanner";
 import { verifyOTPAsync } from "../../redux/slice/registerSlice";
 import Spinner from "../Spinner";
 import { useSelector } from "react-redux";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const OneTimePassword: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
@@ -75,7 +76,10 @@ const OneTimePassword: React.FC = () => {
 
         <p
           className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            scrollToTop();
+          }}
         >
           x
         </p>

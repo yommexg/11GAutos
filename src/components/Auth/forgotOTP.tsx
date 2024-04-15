@@ -7,6 +7,7 @@ import { verifyForgotOTPAsync } from "../../redux/slice/forgotPasswordSlice.";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import Spinner from "../Spinner";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const ForgotOTP: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
@@ -73,7 +74,10 @@ const ForgotOTP: React.FC = () => {
         {loading && <Spinner />}
         <p
           className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            scrollToTop();
+          }}
         >
           x
         </p>

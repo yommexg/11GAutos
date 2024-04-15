@@ -8,6 +8,7 @@ import { RootState, useAppDispatch } from "../../redux/store";
 import Logo from "../../utils/logo";
 import Spinner from "../Spinner";
 import { loginAsync } from "../../redux/slice/loginSlice";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const Login: React.FC = () => {
   const location = useLocation();
@@ -58,7 +59,10 @@ const Login: React.FC = () => {
         {loading && <Spinner />}
         <p
           className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            scrollToTop();
+          }}
         >
           x
         </p>

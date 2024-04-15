@@ -8,6 +8,7 @@ import Spinner from "../Spinner";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { verifyForgotEmailAsync } from "../../redux/slice/forgotPasswordSlice.";
 import { toast } from "react-toastify";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -43,7 +44,10 @@ const ForgotPassword: React.FC = () => {
 
         <p
           className="absolute right-5 top-3 text-5xl text-slate-700 cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            scrollToTop();
+          }}
         >
           x
         </p>
