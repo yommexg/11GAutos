@@ -93,7 +93,7 @@ const ResetPassword: React.FC = () => {
                 className="bg-slate-200 p-2 text-black font-semibold w-full"
               />
               <button
-                className="absolute right-2 top-3 text-xs"
+                className="absolute right-2 top-3 text-sm"
                 onClick={togglePasswordVisibility}
               >
                 {passwordVisible ? "Hide" : "Show"}

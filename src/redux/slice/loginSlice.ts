@@ -70,9 +70,7 @@ export const loginAsync = createAsyncThunk(
       let errorMessage = "Nework Error, Try Again!!";
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError<LoginError>;
-        if (axiosError.response && axiosError.response.status === 401) {
-          errorMessage = "Incorrect Email or Password";
-        } else if (axiosError.response && axiosError.response.data) {
+        if (axiosError.response && axiosError.response.data) {
           errorMessage = axiosError.response.data.message;
         }
       }

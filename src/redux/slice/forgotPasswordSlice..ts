@@ -114,9 +114,6 @@ export const resetPassword = createAsyncThunk(
         pwd,
       });
 
-      // irechukwuezekiel@gmail.com
-      // olaoluwaakande02@gmail.com
-
       console.log(data);
 
       toast.success(data?.success);

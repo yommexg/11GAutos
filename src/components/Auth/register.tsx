@@ -24,6 +24,8 @@ const Register: React.FC = () => {
   const [usernameTouched, setUsernameTouched] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordTouched, setPasswordTouched] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const [houseNo, setHouseNo] = useState("");
   const [houseNoTouched, setHouseNoTouched] = useState(false);
   const [street, setStreet] = useState("");
@@ -51,17 +53,11 @@ const Register: React.FC = () => {
     }
   };
 
-  const handleRegister = async () => {
-    // Update touched status for each input field
-    setUsernameTouched(true);
-    setPasswordTouched(true);
-    setHouseNoTouched(true);
-    setStreetTouched(true);
-    setCityTouched(true);
-    setStateTouched(true);
-    setCountryTouched(true);
-    setPhoneNumberTouched(true);
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
+  const handleRegister = async () => {
     if (
       !username ||
       !password ||
@@ -72,6 +68,15 @@ const Register: React.FC = () => {
       !country ||
       !phoneNumber
     ) {
+      setUsernameTouched(true);
+      setPasswordTouched(true);
+      setHouseNoTouched(true);
+      setStreetTouched(true);
+      setCityTouched(true);
+      setStateTouched(true);
+      setCountryTouched(true);
+      setPhoneNumberTouched(true);
+
       toast.error("Please Input All fielda");
     } else if (passwordError) {
       toast.error(passwordError);
@@ -149,20 +154,28 @@ const Register: React.FC = () => {
             )}
 
             <label htmlFor="password" className="font-bold text-lg">
-              Password:{" "}
+              Password:
             </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => handlePasswordChange(e.target.value)}
-              onBlur={() => setPasswordTouched(true)}
-              minLength={8}
-              required
-              className={`bg-slate-200 p-2 text-black font-semibold ${
-                passwordTouched && !password ? "border border-red-500" : ""
-              }`}
-            />
+            <div className="relative">
+              <input
+                type={passwordVisible ? "text" : "password"}
+                id="password"
+                value={password}
+                onChange={(e) => handlePasswordChange(e.target.value)}
+                onBlur={() => setPasswordTouched(true)}
+                minLength={8}
+                required
+                className={`bg-slate-200 w-full p-2 text-black font-semibold ${
+                  passwordTouched && !password ? "border border-red-500" : ""
+                }`}
+              />
+              <button
+                className="absolute right-2 top-3 text-sm"
+                onClick={togglePasswordVisibility}
+              >
+                {passwordVisible ? "Hide" : "Show"}
+              </button>
+            </div>
             {passwordTouched && !password && (
               <p className="text-sm text-red-500 italic">
                 Please enter a password.
