@@ -29,9 +29,15 @@ export const verifyEmailAsync = createAsyncThunk(
     try {
       dispatch(getRegisterRequest());
 
-      const { data } = await axiosPrivate.post("verify-email", {
-        email,
-      });
+      const { data } = await axiosPrivate.post(
+        "verify-email",
+        {
+          email,
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
       toast.success(data?.success);
 
