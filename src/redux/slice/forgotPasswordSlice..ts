@@ -114,8 +114,6 @@ export const resetPassword = createAsyncThunk(
         pwd,
       });
 
-      console.log(data);
-
       toast.success(data?.success);
 
       navigate("/login", {
