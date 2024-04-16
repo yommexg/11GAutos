@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
-import { axiosPrivate } from "../../interceptors/axios";
+import { axiosPrivate } from "../../axios/imterceptors";
 
 interface GetUserError {
   message: string;

@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { axiosPrivate } from "../../interceptors/axios";
+import { axiosPrivate } from "../../axios/imterceptors";
 
 interface LogoutError {
   message: string;
@@ -25,7 +25,7 @@ export const logoutAsync = createAsyncThunk(
     try {
       dispatch(getLogoutRequest());
 
-      const { data } = await axiosPrivate.get("logout", {
+      const { data } = await axios.get("http://localhost:5000/logout", {
         withCredentials: true,
       });
 

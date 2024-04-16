@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { axiosPrivate } from "../../interceptors/axios";
+import { axiosPrivate } from "../../axios/imterceptors";
 import { User } from "../../../types";
 
 interface RegisterError {

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 
-import { axiosPrivate } from "../../interceptors/axios";
+import { axiosPrivate } from "../../axios/imterceptors";
 import { getUser } from "./getUserSlice";
 
 interface LoginError {
