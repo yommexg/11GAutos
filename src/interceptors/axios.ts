@@ -4,7 +4,7 @@ let accessToken: string | null = null; // Variable to store the access token
 
 const createAxiosPrivate = (): AxiosInstance => {
   const instance = axios.create({
-    baseURL: "http://localhost:5000/",
+    baseURL: "https://one1gbackend.onrender.com/",
     withCredentials: true, // if needed
   });
 
