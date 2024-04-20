@@ -63,7 +63,7 @@ const RightMenu: React.FC<RightMenuProps> = ({
               <img
                 src={userData.avatar ? userData.avatar : noAvatar}
                 alt={userData.username}
-                className="h-10 w-10  rounded-full"
+                className="h-10 w-10 rounded-full"
               />
               <p className="hidden text-sm lg:block">{userData.username}</p>
               <FaAngleDown />

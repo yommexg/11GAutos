@@ -1,6 +1,10 @@
 import axios, { AxiosInstance } from "axios";
 
-let accessToken: string | null = null; // Variable to store the access token
+let accessToken: string | null = null;
+
+//https://one1gbackend.onrender.com/
+
+//http://localhost:5000/
 
 const createAxiosPrivate = (): AxiosInstance => {
   const instance = axios.create({
