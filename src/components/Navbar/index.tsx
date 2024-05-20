@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-gray-200 z-10 px-4 lg:px-32 py-4 shadow-md h-18 fixed top-0 right-0 left-0">
+    <nav className="bg-gray-200 z-10 px-4 lg:px-8 py-4 shadow-md h-18 fixed top-0 right-0 left-0">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex gap-5 lg:gap-12 items-center">
           <MobileSidebar
@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
             scrollToTop={mobileScrollToTop}
           />
           {!isLeftMenuOpen && <Logo />}
-          <div className="hidden lg:flex flex-row gap-5 text-sm">
+          <div className="hidden lg:flex flex-row gap-5 text-sm flex-wrap">
             <Link
               to="/"
               className={`hover:opacity-60 ${

@@ -1,6 +1,6 @@
-import Banner from "../../components/Banner";
-import SellCar from "../../components/SellCarBanner";
-import Why11G from "../../components/Why!!G";
+import Banner from "./banner";
+import SellCar from "./sellCarBanner";
+import Why11G from "./Why!!G";
 
 const Home = () => {
   return (

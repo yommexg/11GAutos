@@ -1,12 +1,13 @@
 const transImage = new URL(
-  "../../assets/why11G/transparent.svg",
+  "../../../assets/why11G/transparent.svg",
   import.meta.url
 ).href;
 
-const minImage = new URL("../../assets/why11G/MinNotHr.svg", import.meta.url)
+const minImage = new URL("../../../assets/why11G/MinNotHr.svg", import.meta.url)
   .href;
 
-const shopImage = new URL("../../assets/why11G/Shop.svg", import.meta.url).href;
+const shopImage = new URL("../../../assets/why11G/Shop.svg", import.meta.url)
+  .href;
 
 export const Why11GData = [
   {

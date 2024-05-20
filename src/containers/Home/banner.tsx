@@ -20,7 +20,7 @@ const Banner = () => {
       <h2 className="text-xl font-semibold italic">
         Car Buying to Shape Your Life
       </h2>
-      <div className="gap-7 flex text-sm">
+      <div className="gap-7 flex text-sm ">
         <Link
           className="hover:opacity-60 active:opcity-30 border-b pb-3 hover:border-gray-400 active:border-gray-600"
           to="/new-cars"
