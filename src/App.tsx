@@ -25,6 +25,7 @@ import { AppDispatch, RootState } from "./redux/store";
 import { getUser } from "./redux/slice/getUserSlice";
 import { jwtDecode } from "jwt-decode";
 import { User } from "../types";
+import { getNewCars } from "./redux/slice/newCarSlice";
 
 interface JwtPayload {
   UserInfo?: {
@@ -59,6 +60,8 @@ function App() {
         })
       );
     }
+
+    dispatch(getNewCars());
   }, [dispatch]);
 
   return (

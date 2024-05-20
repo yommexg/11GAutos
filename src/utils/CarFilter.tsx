@@ -105,7 +105,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
               <img
                 src={selectedBrandLogo}
                 alt={`${selectedBrand} Logo`}
-                className="w-12 h-12 rounded-full"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full"
               />
             )}
             <select
