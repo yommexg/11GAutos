@@ -17,6 +17,7 @@ const { newCarId } = useParams();
 
   useEffect(() => {
     if (newCarId) {
+
       dispatch(
         getOneNewCar({
 
