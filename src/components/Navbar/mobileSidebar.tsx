@@ -57,7 +57,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <Link
                 to="/new-cars"
                 className={`hover:opacity-60 ${
-                  location.pathname === "/new-cars" ? "text-blue-300" : ""
+                  location.pathname.startsWith("/new-cars") ? "text-blue-300" : ""
                 }`}
                 onClick={scrollToTop}
               >
@@ -66,7 +66,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <Link
                 to="/used-cars"
                 className={`hover:opacity-60 ${
-                  location.pathname === "/used-cars" ? "text-blue-300" : ""
+                 location.pathname.startsWith("/used-cars")  ? "text-blue-300" : ""
                 }`}
                 onClick={scrollToTop}
               >
@@ -75,7 +75,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <Link
                 to="/sell-car"
                 className={`hover:opacity-60 ${
-                  location.pathname === "/sell-car" ? "text-blue-300" : ""
+                  location.pathname.startsWith("/sell-car")  ? "text-blue-300" : ""
                 }`}
                 onClick={scrollToTop}
               >
@@ -84,7 +84,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <Link
                 to="/car-ass"
                 className={`hover:opacity-60 ${
-                  location.pathname === "/car-ass" ? "text-blue-300" : ""
+                location.pathname.startsWith("/car-ass") ? "text-blue-300" : ""
                 }`}
                 onClick={scrollToTop}
               >

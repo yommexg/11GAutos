@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 import { axiosPrivate } from "../../interceptors/axios";
 
@@ -13,12 +14,16 @@ interface getNewCarsState {
   loading: boolean;
 }
 
+interface ExtraArgs {
+  navigate: ReturnType<typeof useNavigate>;
+}
+
 export const getNewCars = createAsyncThunk(
   "car/getNewCars",
   async (_credentials, { dispatch, rejectWithValue }) => {
     try {
       dispatch(getNewCarsRequest());
-      const { data } = await axiosPrivate.get(`availiable-new-cars`);
+      const { data } = await axiosPrivate.get(`/availiable-new-cars`);
       // console.log(data);
       dispatch(getNewCarsSuccessful(data));
     } catch (error) {
@@ -35,6 +40,42 @@ export const getNewCars = createAsyncThunk(
     }
   }
 );
+
+export const getOneNewCar = createAsyncThunk(
+  "car/getOneNewCar",
+  async (
+    {
+      newCarId,
+     
+      extra,
+    }: { newCarId: string; extra: ExtraArgs },
+    { dispatch, rejectWithValue }
+  ) => {
+    const { navigate } = extra;
+
+    try {
+      dispatch(getNewCarsRequest());
+      const { data } = await axiosPrivate.get(
+        `/availiable-new-cars/${newCarId}`
+      );
+      dispatch(getOneNewCarSucessful(data));
+
+      navigate(`/new-cars/${newCarId}`);
+    } catch (error) {
+      console.log("Get New Cars Error", error);
+      let errorMessage = "An error occurred";
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<GetNewCarsError>;
+        if (axiosError.response && axiosError.response.data) {
+          errorMessage = axiosError.response.data.message;
+        }
+      }
+      dispatch(getNewCarsComplete());
+      return rejectWithValue({ message: errorMessage });
+    }
+  }
+);
+
 
 const initialState: getNewCarsState = {
   newCarsData: [],

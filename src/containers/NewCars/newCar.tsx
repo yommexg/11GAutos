@@ -1,11 +1,30 @@
 import { FaWhatsapp } from "react-icons/fa";
 import { NewCar as NewCarType } from "../../../types";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../redux/store";
+import { getOneNewCar } from "../../redux/slice/newCarSlice";
 
 const NewCar: React.FC<{ item: NewCarType }> = ({ item }) => {
+    const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  
   const formattedPrice = new Intl.NumberFormat("en-NG", {
     style: "currency",
     currency: "NGN",
   }).format(item?.price);
+
+   const handleOneCarDetails = async () => {
+    if (item._id) {
+      await dispatch(
+        getOneNewCar({
+          newCarId: item?._id,
+          extra: {
+            navigate,
+          },
+        })
+      );
+    }
+  };
 
   return (
     <div className="bg-gray-100 p-4 w-[150px] md:w-[300px] md:max-h-[400px] md:p-8 rounded-md">
@@ -39,7 +58,7 @@ const NewCar: React.FC<{ item: NewCarType }> = ({ item }) => {
       </div>
 
       <button
-        // onClick={handleOneCarDetails}
+        onClick={handleOneCarDetails}
         className="mt-4 bg-black py-1 px-4 text-white hover:opacity-70 text-sm"
       >
         View Details

@@ -26,6 +26,7 @@ import { getUser } from "./redux/slice/getUserSlice";
 import { jwtDecode } from "jwt-decode";
 import { User } from "../types";
 import { getNewCars } from "./redux/slice/newCarSlice";
+import NewCarDeatils from "./containers/NewCars/newCarDeatils";
 
 interface JwtPayload {
   UserInfo?: {
@@ -36,6 +37,7 @@ interface JwtPayload {
 function App() {
   const loading = useSelector((state: RootState) => state.getUser.loading);
   const loading2 = useSelector((state: RootState) => state.logout.loading);
+  const loading3 = useSelector((state: RootState) => state.newCar.loading);
 
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
@@ -66,13 +68,14 @@ function App() {
 
   return (
     <>
-      {(loading || loading2) && <Spinner />}
+      {(loading || loading2 || loading3) && <Spinner />}
 
       <Navbar />
       <div className="mt-[80px]">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/new-cars" element={<NewCars />} />
+          <Route path="/new-cars/:newCarId" element={<NewCarDeatils />} />
           <Route path="/used-cars" element={<UsedCars />} />
           <Route path="/car-ass" element={<CarAssesories />} />
           {Object.entries(userData)?.length !== 0 &&

@@ -33,6 +33,9 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
 
   const [selectedBrandLogo, setSelectedBrandLogo] = useState("");
 
+  const sortedBrands = brands.slice().sort((a, b) => a.brand.localeCompare(b.brand));
+
+
   const handleBrandChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedBrand = event.target.value;
     setSelectedBrand(selectedBrand);
@@ -115,9 +118,9 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
               className="p-2"
             >
               <option value="">
-                <p className="text-gray-500"> Filter By Brands</p>
+             Filter By Brands
               </option>
-              {brands.map((brand) => (
+              {sortedBrands.map((brand) => (
                 <option key={brand.brand} value={brand.brand}>
                   {brand.brand}
                 </option>
