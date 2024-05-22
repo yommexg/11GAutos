@@ -3,6 +3,7 @@ import { NewCar as NewCarType } from "../../../types";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/store";
 import { getOneNewCar } from "../../redux/slice/newCarSlice";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 const NewCar: React.FC<{ item: NewCarType }> = ({ item }) => {
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ const NewCar: React.FC<{ item: NewCarType }> = ({ item }) => {
           },
         })
       );
+      scrollToTop()
     }
   };
 

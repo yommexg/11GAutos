@@ -12,11 +12,11 @@ const ImageSwitcher: React.FC<{ images: string[], name: string }> = ({ images, n
   };
 
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center gap-5 py-4">
       <img
         src={images && images[largeImageIndex]}
         alt={name}
-        className="object-cover rounded-lg shadow-md"
+        className="object-center rounded-lg shadow-md w-[350px] h-[200px] md:w-[700px] md:h-[500px] lg:w-[900px] lg:h-[600px]"
       />
       <div className="flex gap-5">
         {images && images.map((image, index) => (

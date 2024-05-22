@@ -1,15 +1,8 @@
-import { Link } from "react-router-dom";
 import SearchInput from "../../utils/search";
 
 const banner1 = new URL("../../assets/banner/banner.jpg", import.meta.url).href;
 
 const Banner = () => {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <div
@@ -20,7 +13,7 @@ const Banner = () => {
       <h2 className="text-xl font-semibold italic">
         Car Buying to Shape Your Life
       </h2>
-      <div className="gap-7 flex text-sm ">
+      {/* <div className="gap-7 flex text-sm ">
         <Link
           className="hover:opacity-60 active:opcity-30 border-b pb-3 hover:border-gray-400 active:border-gray-600"
           to="/new-cars"
@@ -42,7 +35,7 @@ const Banner = () => {
         >
           Shop Assesories
         </Link>
-      </div>
+      </div> */}
       <div className="sm:hidden">
         <SearchInput />
       </div>

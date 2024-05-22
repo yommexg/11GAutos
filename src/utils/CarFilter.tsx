@@ -24,12 +24,8 @@ interface FilterProps {
 const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
   const [selectedBrand, setSelectedBrand] = useState<string | undefined>();
   const [selectedYear, setSelectedYear] = useState<number | undefined>();
-  const [selectedFuelType, setSelectedFuelType] = useState<
-    string | undefined
-  >();
-  const [selectedEngineType, setSelectedEngineType] = useState<
-    string | undefined
-  >();
+  const [selectedFuelType, setSelectedFuelType] = useState<string | undefined>();
+  const [selectedEngineType, setSelectedEngineType] = useState<string | undefined>();
 
   const [selectedBrandLogo, setSelectedBrandLogo] = useState("");
 
