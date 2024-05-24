@@ -24,13 +24,18 @@ interface FilterProps {
 const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
   const [selectedBrand, setSelectedBrand] = useState<string | undefined>();
   const [selectedYear, setSelectedYear] = useState<number | undefined>();
-  const [selectedFuelType, setSelectedFuelType] = useState<string | undefined>();
-  const [selectedEngineType, setSelectedEngineType] = useState<string | undefined>();
+  const [selectedFuelType, setSelectedFuelType] = useState<
+    string | undefined
+  >();
+  const [selectedEngineType, setSelectedEngineType] = useState<
+    string | undefined
+  >();
 
   const [selectedBrandLogo, setSelectedBrandLogo] = useState("");
 
-  const sortedBrands = brands.slice().sort((a, b) => a.brand.localeCompare(b.brand));
-
+  const sortedBrands = brands
+    .slice()
+    .sort((a, b) => a.brand.localeCompare(b.brand));
 
   const handleBrandChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedBrand = event.target.value;
@@ -50,7 +55,10 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
   };
 
   const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedYear(parseInt(event.target.value));
+    const selectedYear = event.target.value
+      ? parseInt(event.target.value)
+      : undefined;
+    setSelectedYear(selectedYear);
     if (onFilterChange) {
       onFilterChange({
         brand: selectedBrand,
@@ -113,9 +121,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
               onChange={handleBrandChange}
               className="p-2"
             >
-              <option value="">
-             Filter By Brands
-              </option>
+              <option value="">Filter By Brands</option>
               {sortedBrands.map((brand) => (
                 <option key={brand.brand} value={brand.brand}>
                   {brand.brand}
