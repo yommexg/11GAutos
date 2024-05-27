@@ -1,7 +1,3 @@
-import { Link } from "react-router-dom";
-
-import { PrivacyPolicy } from "./data";
-
 const Footer3 = () => {
   return (
     <>
@@ -24,7 +20,7 @@ const Footer3 = () => {
           sale. By accessing this website, you agree to the 11G Terms of Service
           and Privacy Policy.
         </p>
-        <div className="flex items-center justify-center gap-5 text-gray-600">
+        {/* <div className="flex items-center justify-center gap-5 text-gray-600">
           {PrivacyPolicy.map((item) => (
             <Link
               to={item?.link}
@@ -34,7 +30,7 @@ const Footer3 = () => {
               {item.name}
             </Link>
           ))}
-        </div>
+        </div> */}
       </div>
       <p className="text-center italic my-5 text-sm font-semibold">
         © and ™ 11GAutos, Inc. All rights reserved.
