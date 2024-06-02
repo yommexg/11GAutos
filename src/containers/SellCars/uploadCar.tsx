@@ -1,6 +1,12 @@
 import { jwtDecode } from "jwt-decode";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import { scrollToTop } from "../../utils/scrollToTop";
+import { User } from "../../../types";
+import { RootState } from "../../redux/store";
+import NonSeller from "./nonSeller";
+import Seller from "./seller";
 
 interface JwtPayload {
   UserInfo?: {
@@ -14,6 +20,10 @@ const UploadCar = () => {
     ? jwtDecode<JwtPayload>(accessToken)
     : null;
   const userId: string | undefined = decodedToken?.UserInfo?._id;
+
+  const userData = useSelector(
+    (state: RootState) => state.getUser.userData as User
+  );
 
   return (
     <div>
@@ -31,6 +41,8 @@ const UploadCar = () => {
           </Link>
         </div>
       )}
+      {userId && userData.status === 1 && <NonSeller />}
+      {userId && userData.status === 2 && <Seller />}
     </div>
   );
 };
