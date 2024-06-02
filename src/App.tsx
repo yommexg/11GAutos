@@ -29,6 +29,8 @@ import { getNewCars } from "./redux/slice/newCarSlice";
 import { getusedCars } from "./redux/slice/usedCarSlice";
 import UsedCarDetails from "./containers/UsedCars/usedCarDetails";
 import NewCarDetails from "./containers/NewCars/newCarDetails";
+import { getCarItems } from "./redux/slice/carAss";
+import CarItemDetails from "./containers/CarAss/carItemDetails";
 
 interface JwtPayload {
   UserInfo?: {
@@ -41,6 +43,7 @@ function App() {
   const loading2 = useSelector((state: RootState) => state.logout.loading);
   const loading3 = useSelector((state: RootState) => state.newCar.loading);
   const loading4 = useSelector((state: RootState) => state.usedCar.loading);
+  const loading5 = useSelector((state: RootState) => state.carAss.loading);
 
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
@@ -68,11 +71,12 @@ function App() {
 
     dispatch(getNewCars());
     dispatch(getusedCars());
+    dispatch(getCarItems());
   }, [dispatch]);
 
   return (
     <>
-      {(loading || loading2 || loading3 || loading4) && <Spinner />}
+      {(loading || loading2 || loading3 || loading4 || loading5) && <Spinner />}
 
       <Navbar />
       <div className="mt-[80px]">
@@ -81,6 +85,7 @@ function App() {
           <Route path="/new-cars" element={<NewCars />} />
           <Route path="/new-cars/:newCarId" element={<NewCarDetails />} />
           <Route path="/used-cars/:usedCarId" element={<UsedCarDetails />} />
+          <Route path="/car-ass/:itemId" element={<CarItemDetails />} />
           <Route path="/used-cars" element={<UsedCars />} />
           <Route path="/car-ass" element={<CarAssesories />} />
           {Object.entries(userData)?.length !== 0 &&

@@ -1,5 +1,13 @@
+import SellBanner from "./banner";
+import UploadCar from "./uploadCar";
+
 const SellCars = () => {
-  return <div>SellCars</div>;
+  return (
+    <>
+      <SellBanner />
+      <UploadCar />
+    </>
+  );
 };
 
 export default SellCars;

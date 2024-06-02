@@ -43,7 +43,8 @@ const NewCarDetails = () => {
       <div className="flex items-center justify-between">
         <FaArrowLeft
           onClick={() => navigate("/new-cars")}
-          className="hover:opacity-60"
+          className="hover:opacity-60 cursor-pointer"
+          size={25}
         />
         <h2 className="text-xl font-bold text-center">
           {newCar.carName}
@@ -69,8 +70,8 @@ const NewCarDetails = () => {
       </div>
       <ImageSwitcher images={newCar.carImage} name={newCar.carName} />
 
-      <div className="bg-white shadow-xl flex flex-col gap-4  mt-10 rounded-xl p-4">
-        <p className="text-lg text-blue-600 font-bold italic">
+      <div className="bg-white shadow-xl flex flex-col gap-4  mt-10 rounded-xl p-10 md:place-content-center md:px-[300px]">
+        <p className="text-lg text-blue-600 place-content-center font-bold italic">
           {formattedPrice}
         </p>
         <p className="italic text-slate-500">
@@ -128,7 +129,7 @@ const NewCarDetails = () => {
           </span>
         </p>
 
-        <p className="italic text-slate-500 text-center mt-4">
+        <p className="italic text-slate-500">
           Description:
           <span className="text-[#1B1B1B] block font-bold not-italic ml-2">
             {newCar.description}

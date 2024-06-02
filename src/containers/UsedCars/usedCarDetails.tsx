@@ -46,9 +46,10 @@ const UsedCarDetails = () => {
         <FaArrowLeft
           onClick={() => navigate("/used-cars")}
           className="hover:opacity-60 cursor-pointer"
+          size={25}
         />
         <h2 className="text-xl font-bold text-center">
-          {usedCar.carName}{" "}
+          {usedCar.carName}
           <small
             className="block font-thin text-xs italic -mt-1"
             style={{
@@ -72,20 +73,19 @@ const UsedCarDetails = () => {
       </div>
       <ImageSwitcher images={usedCar.carImage} name={usedCar.carName} />
 
-      <div className="bg-white flex flex-col md:flex-row gap-10 md:gap-[300px] md:justify-center px-6 md:px-40 py-10 shadow-xl mt-10 rounded-xl">
+      <div className="bg-white flex flex-col md:flex-row gap-10 md:gap-[300px] md:justify-center px-10 md:px-40 py-10 shadow-xl mt-10 rounded-xl">
         <div className=" flex flex-col gap-4">
           <p className="text-lg text-blue-600 font-bold italic">
             {formattedPrice}
           </p>
           <p className="italic text-slate-500">
-            Discount:{" "}
+            Discount:
             <span className="text-[#1B1B1B] ml-2 not-italic font-bold">
               {usedCar.discount}%
             </span>
           </p>
 
           <p className="italic text-slate-500">
-            {" "}
             Quantity Availiable:
             <span className="text-[#1B1B1B] ml-2 not-italic font-bold">
               {usedCar.quantity}
@@ -145,25 +145,25 @@ const UsedCarDetails = () => {
           <h2 className="text-center text-lg font-bold mb-4">Car Location</h2>
           <div className="flex flex-col gap-4 text-xs md:text-base">
             <p>
-              Bus Stop / Land Mark:{" "}
+              Bus Stop / Land Mark:
               <span className="font-bold text-lg capitalize text-blue-500 ml-2">
                 {address?.busStop}
               </span>
             </p>
             <p>
-              City:{" "}
+              City:
               <span className="text-blue-500 font-bold text-lg capitalize ml-2 ">
                 {address?.city}
               </span>
             </p>
             <p>
-              State:{" "}
+              State:
               <span className="font-bold text-lg capitalize ml-2 text-blue-500">
                 {address?.state}
               </span>
             </p>
             <p>
-              Country:{" "}
+              Country:
               <span className="font-bold text-lg capitalize ml-2 text-blue-500">
                 {address?.country}
               </span>
