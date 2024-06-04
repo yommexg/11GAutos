@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 
 import { axiosPrivate } from "../../interceptors/axios";
-import { getUser } from "./getUserSlice";
+import { getUser } from "./userSlice";
 
 interface LoginError {
   message: string;

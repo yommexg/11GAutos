@@ -22,7 +22,7 @@ import ResetPassword from "./components/Auth/resetPassword";
 import Logout from "./components/Auth/logout";
 
 import { AppDispatch, RootState } from "./redux/store";
-import { getUser } from "./redux/slice/getUserSlice";
+import { getUser } from "./redux/slice/userSlice";
 import { jwtDecode } from "jwt-decode";
 import { User } from "../types";
 import { getNewCars } from "./redux/slice/newCarSlice";

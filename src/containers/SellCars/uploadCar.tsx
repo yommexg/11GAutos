@@ -27,7 +27,7 @@ const UploadCar = () => {
 
   return (
     <div>
-      {!userId && (
+      {!userId || Object.entries(userData).length === 0 ? (
         <div className="flex flex-col items-center gap-8 p-20">
           <h2 className="italic text-lg font-semibold text-blue-500 lg:text-2xl">
             Login to view full Experience
@@ -40,9 +40,32 @@ const UploadCar = () => {
             Continue
           </Link>
         </div>
+      ) : (
+        <>
+          {accessToken && userId && userData.status === 1 && (
+            <NonSeller accessToken={accessToken} userId={userId} />
+          )}
+          {accessToken && userId && userData.status === 3 && (
+            <div className="text-center px-4 py-32 flex flex-col gap-5">
+              <p className="text-blue-600 font-semibold text-lg md:text-3xl">
+                Your request to become a car seller is under review...
+              </p>
+              <p className="text-sm md:text-lg italic">
+                Please Check back on or before 24hrs. If there is no reaponse
+                within the time frame, <br />
+                Contact us at{" "}
+                <a
+                  href="tel:+2348153182058"
+                  className="font-bold cursor-pointer not-italic px-2"
+                >
+                  +2348153182058
+                </a>
+              </p>
+            </div>
+          )}
+          {userId && userData.status === 2 && <Seller />}
+        </>
       )}
-      {userId && userData.status === 1 && <NonSeller />}
-      {userId && userData.status === 2 && <Seller />}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import loginSlice from "./slice/loginSlice";
 import logoutSlice from "./slice/logoutSlice";
-import getUserSlice from "./slice/getUserSlice";
+import getUserSlice from "./slice/userSlice";
 import registerSlice from "./slice/registerSlice";
 import forgotSlice from "./slice/forgotPasswordSlice.";
 import newCarSlice from "./slice/newCarSlice";

@@ -1,5 +1,7 @@
 import { useState } from "react"; // Correct import statement
 import { toast } from "react-toastify";
+import { useAppDispatch } from "../../redux/store";
+import { sellerRequest } from "../../redux/slice/userSlice";
 
 interface IdentificationOption {
   value: string;
@@ -12,9 +14,14 @@ const identificationOptions: IdentificationOption[] = [
   { value: "passport", label: "Passport" },
 ];
 
-const NonSeller: React.FC = () => {
+const NonSeller: React.FC<{ accessToken: string; userId: string }> = ({
+  accessToken,
+  userId,
+}) => {
   const [selectedValue, setSelectedValue] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const dispatch = useAppDispatch();
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(event.target.value);
@@ -34,8 +41,15 @@ const NonSeller: React.FC = () => {
       toast.error("Please Select Identification Type");
     } else if (!selectedFile) {
       toast.error("Please Choose File");
-    } else if (selectedFile && selectedValue) {
-      console.log("ok");
+    } else if (selectedFile && selectedValue && accessToken && userId) {
+      dispatch(
+        sellerRequest({
+          accessToken,
+          documentName: selectedValue,
+          selectedFile: selectedFile,
+          userId,
+        })
+      );
     }
   };
 

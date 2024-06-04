@@ -46,7 +46,7 @@ export const getOneNewCar = createAsyncThunk(
   async (
     {
       newCarId,
-     
+
       extra,
     }: { newCarId: string; extra: ExtraArgs },
     { dispatch, rejectWithValue }
@@ -75,7 +75,6 @@ export const getOneNewCar = createAsyncThunk(
     }
   }
 );
-
 
 const initialState: getNewCarsState = {
   newCarsData: [],
