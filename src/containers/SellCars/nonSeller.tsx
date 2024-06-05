@@ -10,7 +10,7 @@ interface IdentificationOption {
 
 const identificationOptions: IdentificationOption[] = [
   { value: "nin", label: "National Identification Number (NIN)" },
-  { value: "diving_license", label: "Diving License" },
+  { value: "license", label: "Diving License" },
   { value: "passport", label: "Passport" },
 ];
 

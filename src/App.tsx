@@ -26,7 +26,7 @@ import { getUser } from "./redux/slice/userSlice";
 import { jwtDecode } from "jwt-decode";
 import { User } from "../types";
 import { getNewCars } from "./redux/slice/newCarSlice";
-import { getusedCars } from "./redux/slice/usedCarSlice";
+import { getUsedCars, getUsedCarsByUserId } from "./redux/slice/usedCarSlice";
 import UsedCarDetails from "./containers/UsedCars/usedCarDetails";
 import NewCarDetails from "./containers/NewCars/newCarDetails";
 import { getCarItems } from "./redux/slice/carAss";
@@ -67,10 +67,11 @@ function App() {
           userId,
         })
       );
+      dispatch(getUsedCarsByUserId({ userId }));
     }
 
     dispatch(getNewCars());
-    dispatch(getusedCars());
+    dispatch(getUsedCars());
     dispatch(getCarItems());
   }, [dispatch]);
 

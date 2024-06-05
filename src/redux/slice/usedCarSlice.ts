@@ -1,16 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { axiosPrivate } from "../../interceptors/axios";
+import { UsedCar } from "../../../types";
 
-interface GetusedCarsError {
+interface FileWithPreview extends File {
+  previewUrl?: string;
+}
+
+interface GetUsedCarsError {
   message: string;
 }
 
 interface getUsedCarsState {
   usedCarsData: object;
-  oneusedCarData: object;
+  oneUsedCarData: object;
+  usedCarsDataByUserId: object;
   loading: boolean;
 }
 
@@ -18,8 +25,8 @@ interface ExtraArgs {
   navigate: ReturnType<typeof useNavigate>;
 }
 
-export const getusedCars = createAsyncThunk(
-  "car/getusedCars",
+export const getUsedCars = createAsyncThunk(
+  "car/getUsedCars",
   async (_credentials, { dispatch, rejectWithValue }) => {
     try {
       dispatch(getUsedCarsRequest());
@@ -30,7 +37,7 @@ export const getusedCars = createAsyncThunk(
       console.log("Get Used Cars Error", error);
       let errorMessage = "An error occurred";
       if (axios.isAxiosError(error)) {
-        const axiosError = error as AxiosError<GetusedCarsError>;
+        const axiosError = error as AxiosError<GetUsedCarsError>;
         if (axiosError.response && axiosError.response.data) {
           errorMessage = axiosError.response.data.message;
         }
@@ -41,14 +48,32 @@ export const getusedCars = createAsyncThunk(
   }
 );
 
+export const getUsedCarsByUserId = createAsyncThunk(
+  "car/getUsedCarsByUserId ",
+  async ({ userId }: { userId: string }, { dispatch, rejectWithValue }) => {
+    try {
+      dispatch(getUsedCarsRequest());
+      const { data } = await axiosPrivate.get(`/used-car/seller/${userId}`);
+      console.log(data);
+      dispatch(getUsedCarsByUserIdSuccessful(data));
+    } catch (error) {
+      console.log("Get used Cars by userId Error", error);
+      let errorMessage = "An error occurred";
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<GetUsedCarsError>;
+        if (axiosError.response && axiosError.response.data) {
+          errorMessage = axiosError.response.data.message;
+        }
+      }
+      dispatch(getUsedCarsComplete());
+      return rejectWithValue({ message: errorMessage });
+    }
+  }
+);
 export const getOneUsedCar = createAsyncThunk(
   "car/getOneUsedCar",
   async (
-    {
-      usedCarId,
-
-      extra,
-    }: { usedCarId: string; extra: ExtraArgs },
+    { usedCarId, extra }: { usedCarId: string; extra: ExtraArgs },
     { dispatch, rejectWithValue }
   ) => {
     const { navigate } = extra;
@@ -65,7 +90,101 @@ export const getOneUsedCar = createAsyncThunk(
       console.log("Get used Cars Error", error);
       let errorMessage = "An error occurred";
       if (axios.isAxiosError(error)) {
-        const axiosError = error as AxiosError<GetusedCarsError>;
+        const axiosError = error as AxiosError<GetUsedCarsError>;
+        if (axiosError.response && axiosError.response.data) {
+          errorMessage = axiosError.response.data.message;
+        }
+      }
+      dispatch(getUsedCarsComplete());
+      return rejectWithValue({ message: errorMessage });
+    }
+  }
+);
+
+export const addUsedCar = createAsyncThunk(
+  "car/addUsedCar",
+  async (
+    {
+      car: {
+        carName,
+        carColor,
+        carBrand,
+        price,
+        quantity,
+        year,
+        discount,
+        gearType,
+        energyType,
+        engineNumber,
+        engineType,
+        plateNumber,
+        carLocation: { busStop, city, country, state },
+        description,
+      },
+      selectedFiles,
+      userId,
+      extra,
+    }: {
+      car: UsedCar;
+      selectedFiles: FileWithPreview[];
+      userId: string;
+      extra: ExtraArgs;
+    },
+    { dispatch, rejectWithValue }
+  ) => {
+    const { navigate } = extra;
+
+    try {
+      dispatch(getUsedCarsRequest());
+
+      const formData = new FormData();
+
+      formData.append("carName", carName);
+      formData.append("carBrand", carBrand);
+      formData.append("color", carColor);
+      formData.append("gearType", gearType);
+      formData.append("year", year.toString());
+      formData.append("price", price.toString());
+      formData.append("discount", discount.toString());
+      formData.append("quantity", quantity.toString());
+      formData.append("description", description);
+      formData.append("engineType", engineType);
+      formData.append("engineNumber", engineNumber);
+      formData.append("plateNumber", plateNumber);
+      formData.append("carColor", carColor);
+      formData.append("energyType", energyType);
+
+      formData.append("carLocation[busStop]", busStop);
+      formData.append("carLocation[city]", city);
+      formData.append("carLocation[country]", country);
+      formData.append("carLocation[state]", state);
+
+      for (let i = 0; i < selectedFiles.length; i++) {
+        formData.append("Used-Car", selectedFiles[i]);
+      }
+
+      const { data } = await axiosPrivate.post(
+        `/${userId}/create-used-car`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      toast.success(data.success);
+
+      await dispatch(getUsedCars());
+
+      dispatch(getUsedCarsComplete());
+
+      navigate("/sell-car");
+    } catch (error) {
+      console.log("Add Used Car Error", error);
+      let errorMessage = "An error occurred";
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<GetUsedCarsError>;
         if (axiosError.response && axiosError.response.data) {
           errorMessage = axiosError.response.data.message;
         }
@@ -78,7 +197,8 @@ export const getOneUsedCar = createAsyncThunk(
 
 const initialState: getUsedCarsState = {
   usedCarsData: [],
-  oneusedCarData: [],
+  oneUsedCarData: [],
+  usedCarsDataByUserId: [],
   loading: false,
 };
 
@@ -93,8 +213,12 @@ const usedCarSlice = createSlice({
       state.usedCarsData = action.payload;
       state.loading = false;
     },
+    getUsedCarsByUserIdSuccessful: (state, action) => {
+      state.usedCarsDataByUserId = action.payload;
+      state.loading = false;
+    },
     getOneUsedCarSucessful: (state, action) => {
-      state.oneusedCarData = action.payload;
+      state.oneUsedCarData = action.payload;
       state.loading = false;
     },
     getUsedCarsComplete: (state) => {
@@ -108,6 +232,7 @@ export const {
   getUsedCarsComplete,
   getUsedCarsRequest,
   getOneUsedCarSucessful,
+  getUsedCarsByUserIdSuccessful,
 } = usedCarSlice.actions;
 
 export default usedCarSlice;

@@ -29,7 +29,7 @@ const UploadCar = () => {
     <div>
       {!userId || Object.entries(userData).length === 0 ? (
         <div className="flex flex-col items-center gap-8 p-20">
-          <h2 className="italic text-lg font-semibold text-blue-500 lg:text-2xl">
+          <h2 className="italic text-lg font-semibold text-blue-500 lg:text-2xl text-center">
             Login to view full Experience
           </h2>
           <Link
@@ -63,7 +63,9 @@ const UploadCar = () => {
               </p>
             </div>
           )}
-          {userId && userData.status === 2 && <Seller />}
+          {accessToken && userId && userData.status === 2 && (
+            <Seller userId={userId} />
+          )}
         </>
       )}
     </div>
