@@ -10,7 +10,12 @@ const Seller: React.FC<{ userId: string }> = ({ userId }) => {
     (state: RootState) => state.usedCar.usedCarsDataByUserId as UsedCarType[]
   );
 
-  console.log(usedCarDataById);
+  const sortedUsedCarData = usedCarDataById.slice().sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+
+    return dateB.getTime() - dateA.getTime();
+  });
 
   return (
     <div className="py-10">
@@ -19,8 +24,13 @@ const Seller: React.FC<{ userId: string }> = ({ userId }) => {
         List of Your Uploaded Cars
       </h2>
       <div className="flex w-[100%] flex-wrap justify-center gap-8 px-2 py-4 overflow-x-hidden">
-        {usedCarDataById.length > 0 &&
-          usedCarDataById.map((item) => <UsedCar key={item._id} item={item} />)}
+        {sortedUsedCarData.length === 0 && (
+          <p className="my-10 text-xl font-bold">No Car Uploaded</p>
+        )}
+        {sortedUsedCarData.length > 0 &&
+          sortedUsedCarData.map((item) => (
+            <UsedCar key={item._id} item={item} />
+          ))}
       </div>
     </div>
   );

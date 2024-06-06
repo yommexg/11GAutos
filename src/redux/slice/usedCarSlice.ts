@@ -18,6 +18,7 @@ interface getUsedCarsState {
   usedCarsData: object;
   oneUsedCarData: object;
   usedCarsDataByUserId: object;
+  oneUsedCarDataByUserId: object;
   loading: boolean;
 }
 
@@ -54,7 +55,7 @@ export const getUsedCarsByUserId = createAsyncThunk(
     try {
       dispatch(getUsedCarsRequest());
       const { data } = await axiosPrivate.get(`/used-car/seller/${userId}`);
-      console.log(data);
+      // console.log(data);
       dispatch(getUsedCarsByUserIdSuccessful(data));
     } catch (error) {
       console.log("Get used Cars by userId Error", error);
@@ -70,6 +71,7 @@ export const getUsedCarsByUserId = createAsyncThunk(
     }
   }
 );
+
 export const getOneUsedCar = createAsyncThunk(
   "car/getOneUsedCar",
   async (
@@ -100,7 +102,36 @@ export const getOneUsedCar = createAsyncThunk(
     }
   }
 );
+export const getOneUsedCarByUserId = createAsyncThunk(
+  "car/getOneUsedCar",
+  async (
+    { usedCarId, extra }: { usedCarId: string; extra: ExtraArgs },
+    { dispatch, rejectWithValue }
+  ) => {
+    const { navigate } = extra;
 
+    try {
+      dispatch(getUsedCarsRequest());
+      const { data } = await axiosPrivate.get(
+        `/availiable-used-cars/${usedCarId}`
+      );
+      dispatch(getOneUsedCarByUserIdSucessful(data));
+
+      navigate(`/seller-car/${usedCarId}`);
+    } catch (error) {
+      console.log("Get used Cars Error", error);
+      let errorMessage = "An error occurred";
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<GetUsedCarsError>;
+        if (axiosError.response && axiosError.response.data) {
+          errorMessage = axiosError.response.data.message;
+        }
+      }
+      dispatch(getUsedCarsComplete());
+      return rejectWithValue({ message: errorMessage });
+    }
+  }
+);
 export const addUsedCar = createAsyncThunk(
   "car/addUsedCar",
   async (
@@ -177,6 +208,8 @@ export const addUsedCar = createAsyncThunk(
 
       await dispatch(getUsedCars());
 
+      await dispatch(getUsedCarsByUserId({ userId }));
+
       dispatch(getUsedCarsComplete());
 
       navigate("/sell-car");
@@ -199,6 +232,7 @@ const initialState: getUsedCarsState = {
   usedCarsData: [],
   oneUsedCarData: [],
   usedCarsDataByUserId: [],
+  oneUsedCarDataByUserId: [],
   loading: false,
 };
 
@@ -221,6 +255,10 @@ const usedCarSlice = createSlice({
       state.oneUsedCarData = action.payload;
       state.loading = false;
     },
+    getOneUsedCarByUserIdSucessful: (state, action) => {
+      state.oneUsedCarDataByUserId = action.payload;
+      state.loading = false;
+    },
     getUsedCarsComplete: (state) => {
       state.loading = false;
     },
@@ -233,6 +271,7 @@ export const {
   getUsedCarsRequest,
   getOneUsedCarSucessful,
   getUsedCarsByUserIdSuccessful,
+  getOneUsedCarByUserIdSucessful,
 } = usedCarSlice.actions;
 
 export default usedCarSlice;

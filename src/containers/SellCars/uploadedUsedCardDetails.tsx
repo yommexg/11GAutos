@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { FaArrowLeft, FaWhatsapp } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 
 import { RootState, useAppDispatch } from "../../redux/store";
 import { UsedCar } from "../../../types";
-import { getOneUsedCar } from "../../redux/slice/usedCarSlice";
+import { getOneUsedCarByUserId } from "../../redux/slice/usedCarSlice";
 import ImageSwitcher from "../../utils/imageSwitcher";
 import { brands } from "../../utils/carBrands";
+import { statusColor, statusImage, statusName } from "../../utils/carStatus";
 
-const UsedCarDetails: React.FC = () => {
+const UploadedUsedCardDetails: React.FC = () => {
   const { usedCarId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -17,7 +18,7 @@ const UsedCarDetails: React.FC = () => {
   useEffect(() => {
     if (usedCarId) {
       dispatch(
-        getOneUsedCar({
+        getOneUsedCarByUserId({
           usedCarId,
           extra: {
             navigate,
@@ -28,7 +29,7 @@ const UsedCarDetails: React.FC = () => {
   }, [usedCarId, dispatch, navigate]);
 
   const usedCar = useSelector(
-    (state: RootState) => state.usedCar.oneUsedCarData as UsedCar
+    (state: RootState) => state.usedCar.oneUsedCarDataByUserId as UsedCar
   );
 
   const usedCarBrand = brands.find((brand) => brand.brand === usedCar.carBrand);
@@ -40,11 +41,23 @@ const UsedCarDetails: React.FC = () => {
     currency: "NGN",
   }).format(usedCar?.price);
 
+  const formatDate = (dateString: string) => {
+    const dateObject = new Date(dateString);
+
+    const formattedDate = dateObject.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
+    return formattedDate;
+  };
+
   return (
     <div className="my-4 mx-3 p-4 bg-gray-200">
       <div className="flex items-center justify-between">
         <FaArrowLeft
-          onClick={() => navigate("/used-cars")}
+          onClick={() => navigate("/sell-car")}
           className="hover:opacity-60 cursor-pointer"
           size={25}
         />
@@ -60,20 +73,30 @@ const UsedCarDetails: React.FC = () => {
             {usedCar.carColor}
           </small>
         </h2>
-
-        <div className="flex flex-col items-center gap-1 md:gap-3 cursor-pointer hover:opacity-45">
-          <a
-            href={`https://wa.me/+2348153192058?text=${encodeURIComponent(
-              `Hello! I saw this ${usedCar.carName} on your website. I want to make more enquiries about the car`
-            )}`}
+        <div className="flex items-center gap-1">
+          <img
+            src={statusImage[usedCar.status as number]}
+            alt=""
+            className="md:w-6 md:h-6 w-4 h-4"
+          />
+          <p
+            className="font-semibold text-sm sm:text-base"
+            style={{ color: statusColor[usedCar.status as number] }}
           >
-            <FaWhatsapp color="green" size={25} />
-          </a>
+            {statusName[usedCar.status as number]}
+          </p>
         </div>
       </div>
       <ImageSwitcher images={usedCar.carImage} name={usedCar.carName} />
 
       <div className="bg-white flex flex-col md:flex-row gap-10 md:gap-[300px] md:justify-center px-10 md:px-40 py-10 shadow-xl mt-10 rounded-xl">
+        <p>
+          Date Uploaded :{" "}
+          <span className="text-lg font-bold">
+            {" "}
+            {formatDate(usedCar.createdAt)}
+          </span>
+        </p>
         <div className=" flex flex-col gap-4">
           <p className="text-lg text-blue-600 font-bold italic">
             {formattedPrice}
@@ -175,4 +198,4 @@ const UsedCarDetails: React.FC = () => {
   );
 };
 
-export default UsedCarDetails;
+export default UploadedUsedCardDetails;

@@ -68,16 +68,18 @@ const Navbar: React.FC = () => {
             <Link
               to="/new-cars"
               className={`hover:opacity-60 ${
-                  location.pathname.startsWith("/new-cars")  ? "text-blue-300" : ""
+                location.pathname.startsWith("/new-cars") ? "text-blue-300" : ""
               }`}
               onClick={scrollToTop}
             >
-              Buy New Cars
+              Buy New/Foreign Cars
             </Link>
             <Link
               to="/used-cars"
               className={`hover:opacity-60 ${
-          location.pathname.startsWith("/used-cars") ? "text-blue-300" : ""
+                location.pathname.startsWith("/used-cars")
+                  ? "text-blue-300"
+                  : ""
               }`}
               onClick={scrollToTop}
             >
@@ -86,7 +88,7 @@ const Navbar: React.FC = () => {
             <Link
               to="/sell-car"
               className={`hover:opacity-60 ${
-                 location.pathname.startsWith("/sell-car")  ? "text-blue-300" : ""
+                location.pathname.startsWith("/sell-car") ? "text-blue-300" : ""
               }`}
               onClick={scrollToTop}
             >
@@ -95,7 +97,7 @@ const Navbar: React.FC = () => {
             <Link
               to="/car-ass"
               className={`hover:opacity-60 ${
-        location.pathname.startsWith("/car-ass")  ? "text-blue-300" : ""
+                location.pathname.startsWith("/car-ass") ? "text-blue-300" : ""
               }`}
               onClick={scrollToTop}
             >

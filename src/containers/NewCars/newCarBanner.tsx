@@ -12,8 +12,8 @@ const NewCarBanner: React.FC = () => {
           New Cars
         </h2>
         <p className="text-white font-semi-bold md:text-xl text-center md:w-[300px] lg:w-[500px]">
-          Check out different types of new cars at 11G Autos, like sedans and
-          SUVs, to find what suits you best.
+          Check out different types of new and tokunbo (foreign used) cars at
+          11G Autos, like sedans and SUVs, to find what suits you best.
         </p>
       </div>
     </div>

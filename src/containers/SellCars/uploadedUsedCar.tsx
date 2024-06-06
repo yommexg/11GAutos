@@ -3,8 +3,8 @@ import { jwtDecode } from "jwt-decode";
 
 import { UsedCar as UsedCarType } from "../../../types";
 import { useAppDispatch } from "../../redux/store";
-import { getOneUsedCar } from "../../redux/slice/usedCarSlice";
 import { statusColor, statusImage, statusName } from "../../utils/carStatus";
+import { getOneUsedCarByUserId } from "../../redux/slice/usedCarSlice";
 
 interface JwtPayload {
   UserInfo?: {
@@ -25,7 +25,7 @@ const UsedCar: React.FC<{ item: UsedCarType }> = ({ item }) => {
   const handleOneCarDetails = async () => {
     if (item._id && userId) {
       await dispatch(
-        getOneUsedCar({
+        getOneUsedCarByUserId({
           usedCarId: item?._id,
           extra: {
             navigate,
