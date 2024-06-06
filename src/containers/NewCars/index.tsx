@@ -49,39 +49,52 @@ const NewCars: React.FC = () => {
     return isValid;
   });
 
+  const sortedCarData = filteredCars.slice().sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+
+    return dateB.getTime() - dateA.getTime();
+  });
+
   return (
     <>
       {/* New car banner */}
       <NewCarBanner />
-    
+
       {/* Car filter component */}
       <CarFilter onFilterChange={handleFilterChange} />
-      
+
       {/* Display filtered car results */}
       <div className="overflow-y-auto">
         {/* Display message based on filter criteria and results */}
-        {(filters.brand || filters.engineType || filters.fuelType || filters.year) ? (
-          filteredCars.length === 0 ?  
-          <p className="text-center font-extrabold text-xl uppercase">
-            No Cars Available 
-            <small className="block font-normal text-xs capitalize">
-              Change filter to view more products
-            </small>
-          </p> :
-          filteredCars.length === 1 ?  
-          <p className="text-center font-extrabold text-xl uppercase">
-            {filteredCars.length} Car Available
-          </p> :  
-          <p className="text-center font-extrabold text-xl uppercase">
-            {filteredCars.length} Cars Available
-          </p>
-        ): ''}
-        
+        {filters.brand ||
+        filters.engineType ||
+        filters.fuelType ||
+        filters.year ? (
+          filteredCars.length === 0 ? (
+            <p className="text-center font-extrabold text-xl uppercase">
+              No Cars Available
+              <small className="block font-normal text-xs capitalize">
+                Change filter to view more products
+              </small>
+            </p>
+          ) : filteredCars.length === 1 ? (
+            <p className="text-center font-extrabold text-xl uppercase">
+              {filteredCars.length} Car Available
+            </p>
+          ) : (
+            <p className="text-center font-extrabold text-xl uppercase">
+              {filteredCars.length} Cars Available
+            </p>
+          )
+        ) : (
+          ""
+        )}
+
         {/* Display filtered car items */}
         <div className="flex w-[100%] flex-wrap justify-center gap-8 px-2 py-4 overflow-x-hidden">
-          {filteredCars.length > 0 &&
-            filteredCars.map((item) => <NewCar key={item._id} item={item} />)
-          }
+          {sortedCarData.length > 0 &&
+            sortedCarData.map((item) => <NewCar key={item._id} item={item} />)}
         </div>
       </div>
     </>

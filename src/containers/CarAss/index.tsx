@@ -9,20 +9,26 @@ const CarAssesories = () => {
     (state: RootState) => state.carAss.carItemsData as CarAss[]
   );
 
+  const sortedCarItemData = carItem.slice().sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+
+    return dateB.getTime() - dateA.getTime();
+  });
+
   return (
     <>
       <CarAssBanner />
       {carItem.length === 0 && (
         <p className="text-center font-extrabold text-xl uppercase">
           No Item Available
-          {/* <small className="block font-normal text-xs capitalize">
-            Change filter to view more products
-          </small> */}
         </p>
       )}
       <div className="flex w-[100%] flex-wrap justify-center gap-8 px-2 py-4 overflow-x-hidden">
-        {carItem.length > 0 &&
-          carItem.map((item) => <CarItem key={item._id} item={item} />)}
+        {sortedCarItemData.length > 0 &&
+          sortedCarItemData.map((item) => (
+            <CarItem key={item._id} item={item} />
+          ))}
       </div>
     </>
   );

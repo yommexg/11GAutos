@@ -108,7 +108,7 @@ const AddUsedCar: React.FC<{ userId: string }> = ({ userId }) => {
     } else {
       handleClosePopUp();
       if (userId) {
-        const parsedQuantity = quantity !== "" ? parseInt(quantity) : 0;
+        const parsedQuantity = quantity !== "" ? parseInt(quantity) : 1;
         const parsedDiscount = discount !== "" ? parseInt(discount) : 0;
         const parsedPrice = price !== "" ? parseInt(price) : 0;
         await dispatch(

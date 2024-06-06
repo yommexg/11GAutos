@@ -31,6 +31,7 @@ export interface NewCar {
   carColor: string;
   status: number;
   carImage: [string];
+  createdAt: string;
 }
 
 export interface CarLocation {
