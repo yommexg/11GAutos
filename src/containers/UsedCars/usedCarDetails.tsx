@@ -28,7 +28,7 @@ const UsedCarDetails = () => {
   }, [usedCarId, dispatch, navigate]);
 
   const usedCar = useSelector(
-    (state: RootState) => state.usedCar.oneusedCarData as UsedCar
+    (state: RootState) => state.usedCar.oneUsedCarData as UsedCar
   );
 
   const usedCarBrand = brands.find((brand) => brand.brand === usedCar.carBrand);
