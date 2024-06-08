@@ -5,6 +5,7 @@ import { UsedCar as UsedCarType } from "../../../types";
 import { useAppDispatch } from "../../redux/store";
 import { statusColor, statusImage, statusName } from "../../utils/carStatus";
 import { getOneUsedCarByUserId } from "../../redux/slice/usedCarSlice";
+import { scrollToTop } from "../../utils/scrollToTop";
 
 interface JwtPayload {
   UserInfo?: {
@@ -33,6 +34,7 @@ const UsedCar: React.FC<{ item: UsedCarType }> = ({ item }) => {
         })
       );
     }
+    scrollToTop();
   };
 
   const formattedPrice = new Intl.NumberFormat("en-NG", {
