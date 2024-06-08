@@ -24,8 +24,8 @@ const UsedCar: React.FC<{ item: UsedCarType }> = ({ item }) => {
           },
         })
       );
-      scrollToTop();
     }
+    scrollToTop();
   };
 
   return (

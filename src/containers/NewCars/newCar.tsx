@@ -6,15 +6,15 @@ import { getOneNewCar } from "../../redux/slice/newCarSlice";
 import { scrollToTop } from "../../utils/scrollToTop";
 
 const NewCar: React.FC<{ item: NewCarType }> = ({ item }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  
+
   const formattedPrice = new Intl.NumberFormat("en-NG", {
     style: "currency",
     currency: "NGN",
   }).format(item?.price);
 
-   const handleOneCarDetails = async () => {
+  const handleOneCarDetails = async () => {
     if (item._id) {
       await dispatch(
         getOneNewCar({
@@ -24,8 +24,8 @@ const NewCar: React.FC<{ item: NewCarType }> = ({ item }) => {
           },
         })
       );
-      scrollToTop()
     }
+    scrollToTop();
   };
 
   return (

@@ -24,8 +24,8 @@ const CarItem: React.FC<{ item: CarItemType }> = ({ item }) => {
           },
         })
       );
-      scrollToTop();
     }
+    scrollToTop();
   };
 
   return (
