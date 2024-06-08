@@ -32,6 +32,7 @@ import NewCarDetails from "./containers/NewCars/newCarDetails";
 import { getCarItems } from "./redux/slice/carAss";
 import CarItemDetails from "./containers/CarAss/carItemDetails";
 import UploadedUsedCardDetails from "./containers/SellCars/uploadedUsedCardDetails";
+import Settings from "./containers/Settings";
 
 interface JwtPayload {
   UserInfo?: {
@@ -90,6 +91,7 @@ function App() {
           <Route path="/car-ass/:itemId" element={<CarItemDetails />} />
           <Route path="/used-cars" element={<UsedCars />} />
           <Route path="/car-ass" element={<CarAssesories />} />
+          <Route path="/settings" element={<Settings />} />
           {Object.entries(userData)?.length !== 0 &&
           location.pathname === "/login" ? (
             (navigate("/"), null)

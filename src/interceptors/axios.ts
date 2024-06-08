@@ -36,9 +36,8 @@ const createAxiosPrivate = (): AxiosInstance => {
     (response) => response,
     async (error) => {
       if (error.response && error.response.status === 403) {
-        console.log("okay");
         const response = await instance.get("/refresh");
-        console.log(response);
+
         if (response.status === 200) {
           accessToken = response.data?.accessToken;
           localStorage.setItem("accessToken", response.data?.accessToken);

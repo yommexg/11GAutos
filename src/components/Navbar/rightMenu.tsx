@@ -70,7 +70,7 @@ const RightMenu: React.FC<RightMenuProps> = ({
             </div>
           )}
       {isMenuOpen && (
-        <div className="z-50 fixed inset-0  bg-slate-400 opacity-90">
+        <div className="z-50 fixed inset-0  bg-slate-400 opacity-95">
           <div className="absolute right-0 top-0 bottom:-0 min-w-[200px] md:min-w-[250px] px-4 bg-slate-900 shadow-2xl py-4 rounded-tl-lg rounded-bl-lg ">
             <div className="flex items-center gap-2 my-4">
               <img
@@ -80,7 +80,7 @@ const RightMenu: React.FC<RightMenuProps> = ({
               />
               <div>
                 <p className="text-slate-400 font-bold">{userData.username}</p>
-                <p className="text-slate-600 font-bold text-[9px]">
+                <p className="text-blue-600 font-bold text-[9px]">
                   {userData.email}
                 </p>
               </div>
@@ -91,11 +91,15 @@ const RightMenu: React.FC<RightMenuProps> = ({
             >
               x
             </p>
-            <div className="flex flex-col gap-4 mb-10 text-white font-semibold ">
-              <Link to="/" onClick={scrollToTop} className="hover:opacity-50">
-                Profile
-              </Link>
+            <div className="flex flex-col gap-4 my-5 text-white font-semibold ">
               <Link
+                to="/settings"
+                onClick={scrollToTop}
+                className="hover:opacity-50"
+              >
+                View Profile
+              </Link>
+              {/* <Link
                 to="/orders"
                 className="hover:opacity-50"
                 onClick={scrollToTop}
@@ -108,7 +112,7 @@ const RightMenu: React.FC<RightMenuProps> = ({
                 onClick={scrollToTop}
               >
                 Settings
-              </Link>
+              </Link> */}
             </div>
 
             <div className="text-center">
