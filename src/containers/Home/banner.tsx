@@ -1,9 +1,8 @@
-import SearchInput from "../../utils/search";
+// import SearchInput from "../../utils/search";
 
 const banner1 = new URL("../../assets/banner/banner.jpg", import.meta.url).href;
 
 const Banner = () => {
-
   return (
     <div
       style={{ backgroundImage: `url(${banner1})` }}
@@ -36,9 +35,9 @@ const Banner = () => {
           Shop Assesories
         </Link>
       </div> */}
-      <div className="sm:hidden">
+      {/* <div className="sm:hidden">
         <SearchInput />
-      </div>
+      </div> */}
     </div>
   );
 };

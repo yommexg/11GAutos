@@ -1,5 +1,11 @@
 import { useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Link,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Navbar from "./components/Navbar";
@@ -77,6 +83,15 @@ function App() {
     dispatch(getCarItems());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (
+      Object.entries(userData).length !== 0 &&
+      location.pathname === "/login"
+    ) {
+      navigate("/");
+    }
+  }, [userData, location.pathname, navigate]);
+
   return (
     <>
       {(loading || loading2 || loading3 || loading4 || loading5) && <Spinner />}
@@ -84,6 +99,7 @@ function App() {
       <Navbar />
       <div className="mt-[80px]">
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/new-cars" element={<NewCars />} />
           <Route path="/new-cars/:newCarId" element={<NewCarDetails />} />
@@ -92,14 +108,6 @@ function App() {
           <Route path="/used-cars" element={<UsedCars />} />
           <Route path="/car-ass" element={<CarAssesories />} />
           <Route path="/settings" element={<Settings />} />
-          {Object.entries(userData)?.length !== 0 &&
-          location.pathname === "/login" ? (
-            (navigate("/"), null)
-          ) : (
-            <>
-              <Route path="/login" element={<Login />} />
-            </>
-          )}
           <Route path="/sell-car" element={<SellCars />} />
           <Route
             path="/seller-car/:usedCarId"
@@ -112,10 +120,22 @@ function App() {
           <Route path="/forgot-otp" element={<ForgotOTP />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />
     </>
+  );
+}
+
+function NotFound() {
+  return (
+    <div className="h-[80vh] flex flex-col gap-8 place-content-center text-center items-center">
+      <h1 className="text-3xl font-bold text-red-600">404 - Not Found</h1>
+      <Link to="/" className="bg-[#1B1B1B] text-white px-4 py-2 cursor-pointer">
+        Go to Home Page
+      </Link>
+    </div>
   );
 }
 
