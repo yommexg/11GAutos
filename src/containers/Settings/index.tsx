@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-import Logout from "./logout";
+// import Logout from "./logout";
 import ProfileData from "./profileData";
 import ProfilePic from "./profilepic";
 import { jwtDecode } from "jwt-decode";
@@ -26,11 +26,9 @@ const Settings: React.FC = () => {
       <div className="flex flex-col justify-center">
         {userId && (
           <>
-            <div className="overflow-y-auto h-[80vh] md:h-[90vh]">
-              <ProfilePic />
-              <ProfileData />
-            </div>
-            <Logout />
+            <ProfilePic />
+            <ProfileData />
+            {/* <Logout /> */}
           </>
         )}
         {!userId && (

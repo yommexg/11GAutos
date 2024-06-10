@@ -110,7 +110,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/sell-car" element={<SellCars />} />
           <Route
-            path="/seller-car/:usedCarId"
+            path="/sell-car/:usedCarId"
             element={<UploadedUsedCardDetails />}
           />
           <Route path="/verify-email" element={<VerifyEmail />} />

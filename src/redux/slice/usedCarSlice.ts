@@ -117,7 +117,7 @@ export const getOneUsedCarByUserId = createAsyncThunk(
       );
       dispatch(getOneUsedCarByUserIdSucessful(data));
 
-      navigate(`/seller-car/${usedCarId}`);
+      navigate(`/sell-car/${usedCarId}`);
     } catch (error) {
       console.log("Get used Cars Error", error);
       let errorMessage = "An error occurred";

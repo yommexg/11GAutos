@@ -55,10 +55,10 @@ const UploadCar = () => {
                 within the time frame, <br />
                 Contact us at{" "}
                 <a
-                  href="tel:+2348153182058"
+                  href="tel:+2348169427948"
                   className="font-bold cursor-pointer not-italic px-2"
                 >
-                  +2348153182058
+                  +2348169427948
                 </a>
               </p>
             </div>

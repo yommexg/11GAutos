@@ -47,7 +47,8 @@ const CarItemDetails = () => {
 
         <div className="flex flex-col items-center gap-1 md:gap-3 cursor-pointer hover:opacity-45">
           <a
-            href={`https://wa.me/+2348153192058?text=${encodeURIComponent(
+            href={`https://wa.me/+2348169427948
+?text=${encodeURIComponent(
               `Hello! I saw this ${carItem.itemName} on your website. I want to make more enquiries about the car`
             )}`}
           >

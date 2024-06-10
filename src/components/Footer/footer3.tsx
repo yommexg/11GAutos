@@ -1,12 +1,15 @@
 const Footer3 = () => {
   return (
     <>
-      <div className="flex flex-col gap-2 text-[8px] lg:text-xs pt-2 px-6">
+      <div className="flex flex-col gap-5 md:gap-8 md:py-10 py-6 text-xs md:text-base px-6 md:px-24">
         <p className="text-center">
           For questions about the 11G Auto Buying Service please call
-          <span className="border-b ml-2 text-[10px] pb-[2px] border-black font-bold">
-            +234 816 942 7948
-          </span>
+          <a
+            href="tel:+2348169427948"
+            className="font-bold cursor-pointer not-italic border-b ml-2 pb-[2px] border-black"
+          >
+            +2348169427948
+          </a>
         </p>
         <p className="text-center">
           Certified Dealers are contractually obligated by 11G to meet certain

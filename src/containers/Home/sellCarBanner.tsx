@@ -29,13 +29,13 @@ const SellCarBanner = () => {
         <img
           src={sellBanner}
           alt="Sell banner"
-          className="w-[500px] rounded-md lg:w-[40%]"
+          className="w-[400px] rounded-lg lg:w-[40%]"
         />
       </div>
       <Link
         onClick={scrollToTop}
         to="/sell-car"
-        className="p-4 bg-black text-white rounded-lg hover:opacity-65 px-8 my-10"
+        className="p-4 bg-black text-white rounded-lg hover:opacity-65 px-8"
       >
         Get started
       </Link>
