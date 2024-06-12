@@ -11,6 +11,7 @@ import Seller from "./seller";
 interface JwtPayload {
   UserInfo?: {
     _id: string;
+    roles: number[] | null;
   };
 }
 
@@ -20,6 +21,8 @@ const UploadCar = () => {
     ? jwtDecode<JwtPayload>(accessToken)
     : null;
   const userId: string | undefined = decodedToken?.UserInfo?._id;
+
+  const roles = decodedToken?.UserInfo?.roles;
 
   const userData = useSelector(
     (state: RootState) => state.getUser.userData as User
@@ -45,27 +48,35 @@ const UploadCar = () => {
           {accessToken && userId && userData.status === 1 && (
             <NonSeller accessToken={accessToken} userId={userId} />
           )}
-          {accessToken && userId && userData.status === 3 && (
-            <div className="text-center px-4 py-32 flex flex-col gap-5">
-              <p className="text-blue-600 font-semibold text-lg md:text-3xl">
-                Your request to become a car seller is under review...
-              </p>
-              <p className="text-sm md:text-lg italic">
-                Please Check back on or before 24hrs. If there is no reaponse
-                within the time frame, <br />
-                Contact us at{" "}
-                <a
-                  href="tel:+2348169427948"
-                  className="font-bold cursor-pointer not-italic px-2"
-                >
-                  +2348169427948
-                </a>
-              </p>
-            </div>
-          )}
-          {accessToken && userId && userData.status === 2 && (
-            <Seller userId={userId} />
-          )}
+          {accessToken &&
+            userId &&
+            roles &&
+            !roles.includes(5150) &&
+            userData.status === 3 && (
+              <div className="text-center px-4 py-32 flex flex-col gap-5">
+                <p className="text-blue-600 font-semibold text-lg md:text-3xl">
+                  Your request to become a car seller is under review...
+                </p>
+                <p className="text-sm md:text-lg italic">
+                  Please Check back on or before 24hrs. If there is no reaponse
+                  within the time frame, <br />
+                  Contact us at{" "}
+                  <a
+                    href="tel:+2348169427948"
+                    className="font-bold cursor-pointer not-italic px-2"
+                  >
+                    +2348169427948
+                  </a>
+                </p>
+              </div>
+            )}
+          {accessToken &&
+            userId &&
+            roles &&
+            roles.includes(5150) &&
+            (userData.status === 2 || roles.includes(5150)) && (
+              <Seller userId={userId} />
+            )}
         </>
       )}
     </div>
