@@ -29,25 +29,28 @@ const UsedCars: React.FC = () => {
   );
 
   // Apply filters to Used car data
-  const filteredCars = usedCarData.filter((car) => {
-    let isValid = true;
+  const filteredCars =
+    usedCarData.length > 0
+      ? usedCarData.filter((car) => {
+          let isValid = true;
 
-    // Check each filter criterion
-    if (filters.brand && filters.brand !== car.carBrand) {
-      isValid = false;
-    }
-    if (filters.year && filters.year !== car.year) {
-      isValid = false;
-    }
-    if (filters.fuelType && filters.fuelType !== car.energyType) {
-      isValid = false;
-    }
-    if (filters.engineType && filters.engineType !== car.engineType) {
-      isValid = false;
-    }
+          // Check each filter criterion
+          if (filters.brand && filters.brand !== car.carBrand) {
+            isValid = false;
+          }
+          if (filters.year && filters.year !== car.year) {
+            isValid = false;
+          }
+          if (filters.fuelType && filters.fuelType !== car.energyType) {
+            isValid = false;
+          }
+          if (filters.engineType && filters.engineType !== car.engineType) {
+            isValid = false;
+          }
 
-    return isValid;
-  });
+          return isValid;
+        })
+      : [];
 
   const sortedCarData = filteredCars.slice().sort((a, b) => {
     const dateA = new Date(a.createdAt);

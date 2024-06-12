@@ -189,7 +189,7 @@ const Register: React.FC = () => {
               Address:
             </label>
             <input
-              type="text"
+              type="number"
               placeholder="House No"
               value={houseNo}
               onChange={(e) => setHouseNo(e.target.value)}

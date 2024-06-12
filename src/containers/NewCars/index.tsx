@@ -29,25 +29,28 @@ const NewCars: React.FC = () => {
   );
 
   // Apply filters to new car data
-  const filteredCars = newCarData.filter((car) => {
-    let isValid = true;
+  const filteredCars =
+    newCarData.length > 0
+      ? newCarData.filter((car) => {
+          let isValid = true;
 
-    // Check each filter criterion
-    if (filters.brand && filters.brand !== car.carBrand) {
-      isValid = false;
-    }
-    if (filters.year && filters.year !== car.year) {
-      isValid = false;
-    }
-    if (filters.fuelType && filters.fuelType !== car.energyType) {
-      isValid = false;
-    }
-    if (filters.engineType && filters.engineType !== car.engineType) {
-      isValid = false;
-    }
+          // Check each filter criterion
+          if (filters.brand && filters.brand !== car.carBrand) {
+            isValid = false;
+          }
+          if (filters.year && filters.year !== car.year) {
+            isValid = false;
+          }
+          if (filters.fuelType && filters.fuelType !== car.energyType) {
+            isValid = false;
+          }
+          if (filters.engineType && filters.engineType !== car.engineType) {
+            isValid = false;
+          }
 
-    return isValid;
-  });
+          return isValid;
+        })
+      : [];
 
   const sortedCarData = filteredCars.slice().sort((a, b) => {
     const dateA = new Date(a.createdAt);
@@ -58,15 +61,11 @@ const NewCars: React.FC = () => {
 
   return (
     <>
-      {/* New car banner */}
       <NewCarBanner />
 
-      {/* Car filter component */}
       <CarFilter onFilterChange={handleFilterChange} />
 
-      {/* Display filtered car results */}
       <div className="overflow-y-auto">
-        {/* Display message based on filter criteria and results */}
         {filters.brand ||
         filters.engineType ||
         filters.fuelType ||
@@ -91,7 +90,6 @@ const NewCars: React.FC = () => {
           ""
         )}
 
-        {/* Display filtered car items */}
         <div className="flex w-[100%] flex-wrap justify-center gap-8 px-2 py-4 overflow-x-hidden">
           {sortedCarData.length > 0 &&
             sortedCarData.map((item) => <NewCar key={item._id} item={item} />)}

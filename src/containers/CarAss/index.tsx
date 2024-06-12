@@ -9,18 +9,20 @@ const CarAssesories = () => {
     (state: RootState) => state.carAss.carItemsData as CarAss[]
   );
 
-  const sortedCarItemData = carItem.slice().sort((a, b) => {
-    const dateA = new Date(a.createdAt);
-    const dateB = new Date(b.createdAt);
+  const sortedCarItemData = Array.isArray(carItem)
+    ? carItem.slice().sort((a, b) => {
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
 
-    return dateB.getTime() - dateA.getTime();
-  });
+        return dateB.getTime() - dateA.getTime();
+      })
+    : [];
 
   return (
     <>
       <CarAssBanner />
       {carItem.length === 0 && (
-        <p className="text-center font-extrabold text-xl uppercase">
+        <p className="text-center mt-8 font-extrabold text-xl uppercase">
           No Item Available
         </p>
       )}

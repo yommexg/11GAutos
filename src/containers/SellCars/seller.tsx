@@ -10,12 +10,14 @@ const Seller: React.FC<{ userId: string }> = ({ userId }) => {
     (state: RootState) => state.usedCar.usedCarsDataByUserId as UsedCarType[]
   );
 
-  const sortedUsedCarData = usedCarDataById.slice().sort((a, b) => {
-    const dateA = new Date(a.createdAt);
-    const dateB = new Date(b.createdAt);
+  const sortedUsedCarData = Array.isArray(usedCarDataById)
+    ? usedCarDataById.slice().sort((a, b) => {
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
 
-    return dateB.getTime() - dateA.getTime();
-  });
+        return dateB.getTime() - dateA.getTime();
+      })
+    : [];
 
   return (
     <div className="py-10">
