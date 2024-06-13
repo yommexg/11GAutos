@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 import Logo from "../../utils/logo";
-import SearchInput from "../../utils/search";
+// import SearchInput from "../../utils/search";
 import MobileSidebar from "./mobileSidebar";
 import RightMenu from "./rightMenu";
 
@@ -106,11 +106,11 @@ const Navbar: React.FC = () => {
           </div>
         </div>
         <div className="sm:flex flex-row items-center gap-5 ">
-          <div
+          {/* <div
             className={`hidden sm:block ${isRightMenuOpen ? "mr-40" : "mr-10"}`}
           >
             <SearchInput />
-          </div>
+          </div> */}
           <RightMenu
             isMenuOpen={isRightMenuOpen}
             scrollToTop={rightMenuScrollToTop}
